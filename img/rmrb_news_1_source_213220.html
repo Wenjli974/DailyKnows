@@ -1,0 +1,726 @@
+<!DOCTYPE html><html lang="en"><head>
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+	<meta http-equiv="Content-Language" content="utf-8">
+	
+		<title> “说到的就要做到，承诺的就要兑现”（总书记的人民情怀） </title>
+		<meta name="author" content="第001版">
+
+	<meta name="robots" content="all">
+	<meta name="copyright" content="">
+	<meta name="description" content="">
+	<meta name="keywords" content="">
+	<meta name="filetype" content="1">
+	<meta name="publishedtype" content="1">
+	<meta name="pagetype" content="1">
+	<meta name="catalogs" content="rmrbdzb">
+	<meta name="contentid" content="rmrbdzb_30064797">
+	<meta name="publishdate" content="2025-03-30">
+	<!--优先使用 IE 最新版本和 Chrome-->
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+	<!--360 使用Google Chrome Frame-->
+	<meta name="renderer" content="webkit">
+	<link href="../../../../../../testx/template/amucsite/projectPaper/rmPaper/files/default.css" rel="stylesheet">
+	<script language="Javascript" src="../../../../../../testx/template/amucsite/projectPaper/rmPaper/files/prototype.js"></script>
+	<script language="Javascript" src="../../../../../../testx/template/amucsite/projectPaper/rmPaper/files/rmrb/mp.js"></script>
+	<script language="Javascript" src="../../../../../../testx/template/amucsite/projectPaper/rmPaper/files/calendar2.js"></script>
+	<script language="Javascript" src="../../../../../../testx/template/amucsite/projectPaper/rmPaper/files/range.js"></script>
+	<script type="text/javascript" src="../../../../../../testx/template/amucsite/projectPaper/rmPaper/files/app.js"></script>
+	<script src="../../../../../../testx/template/amucsite/projectPaper/rmPaper/files/swiper.min.js"></script>
+	<link href="../../../../../../testx/template/amucsite/projectPaper/rmPaper/files/swiper.min.css" rel="stylesheet">
+	<script type="text/javascript">
+		function nTabs (tabObj, obj) {
+			var tabList = document.getElementById(tabObj).getElementsByTagName("li");
+			for (i = 0; i < tabList.length; i++) {
+				if (tabList[i].id == obj.id) {
+					document.getElementById(tabObj + "_Title" + i).className = "active";
+					document.getElementById(tabObj + "_Content" + i).style.display = "block";
+				} else {
+					document.getElementById(tabObj + "_Title" + i).className = "normal";
+					document.getElementById(tabObj + "_Content" + i).style.display = "none";
+				}
+			}
+		}
+		function CopyAll () {
+
+			var obj = document.getElementById("articleContent");
+
+			if (obj != null) {
+
+				var content = obj.innerText;
+
+				window.clipboardData.setData("Text", content);
+
+				alert("复制成功");
+
+			}
+
+		}
+		
+		function getFontSize(element) {
+			var fontSize;
+			
+			if (window.getComputedStyle) {
+				// 现代浏览器的实现，包括 IE9+
+				fontSize = window.getComputedStyle(element, null).getPropertyValue('font-size');
+			} else if (element.currentStyle) {
+				// 针对 IE8 及更低版本
+				fontSize = element.currentStyle.fontSize;
+			}
+
+			return fontSize;
+		}
+
+		function zoomIn () {
+			newZoom = parseInt(getFontSize($('ozoom'))) + 4 + 'px'
+			$('ozoom').setStyle({'font-size': newZoom});
+		}
+		function zoomOut () {
+			newZoom = parseInt(getFontSize($('ozoom'))) - 4 + 'px'
+			$('ozoom').setStyle({'font-size': newZoom});
+		}
+
+	</script>
+	<script type="text/javascript">
+		var focus_width = 260;
+		var focus_height = 180;
+		var text_height = 20;
+		var swf_height = focus_height + text_height;
+		var pics = "";
+		var links = "";
+		var texts = "";
+		var resCount = 0;
+		function showArtPics () {
+			if (resCount > 0) {
+				pics = pics.substring(0, pics.length - 1);
+				links = links.substring(0, links.length - 1);
+				texts = texts.substring(0, texts.length - 1);
+				var content = "";
+				content += '<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,0,0" width="' + focus_width + '" height="' + swf_height + '">';
+				content += '<param name="allowScriptAccess" value="sameDomain"><param name="movie" value="../../../tplimg/picflash.swf"><param name="quality" value="high"><param name="bgcolor" value="#ffffff">';
+				content += '<param name="menu" value="false"/><param name="wmode" value="opaque"/>';
+				content += '<param name="FlashVars" value="pics=' + pics + '&links=' + links + '&texts=' + texts + '&borderwidth=' + focus_width + '&borderheight=' + focus_height + '&textheight=' + text_height + '">';
+				content += '<embed src="../../../tplimg/picflash.swf" wmode="opaque" FlashVars="pics=' + pics + '&links=' + links + '&texts=' + texts + '&borderwidth=' + focus_width + '&borderheight=' + focus_height + '&textheight=' + text_height + '" menu="false" bgcolor="#ffffff" quality="high" width="' + focus_width + '" height="' + focus_height + '" allowScriptAccess="sameDomain" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" />';
+				content += '<\/object>';
+				document.getElementById("showArtPicsDiv").innerHTML = content;
+			}
+		}
+	</script>
+	<style>
+		body,
+		div {
+			font-family: '宋体';
+			-webkit-text-size-adjust: none;
+		}
+
+		.main .article-box .article h1,
+		.main .article-box .article h2,
+		.main .article-box .article h3 {
+			font-family: Microsoft YaHei, SimSun, sans-serif, '宋体';
+		}
+
+		.main .right-main .title {
+			font-weight: bold;
+		}
+
+		.pci_c {
+			margin: 10px auto;
+			width: 410px
+		}
+
+		table {
+			border-spacing: 0;
+		}
+
+		table td {
+			text-align: center;
+			border-spacing: 0;
+		}
+
+		.pci_c td img {
+			width: auto;
+		}
+
+		.top img {
+			padding-top: 15px;
+			margin-left: 0px;
+		}
+
+		.nav {
+			margin-right: 0;
+		}
+
+		.pci_c td {
+			width: 100%;
+		}
+
+		.pci_c td p {
+			text-align: left;
+			font-size: 14px;
+			width: auto;
+			padding-top: 15px;
+			line-height: 160%;
+		}
+
+		.main .swiper-box .swiper-container .swiper-slide {
+			text-align: center;
+			background: #d00;
+			color: #fff;
+			width: 19.5%;
+			float: left;
+			margin-bottom: 1px;
+			margin-right: 1px;
+			text-indent: 0;
+			height: 34px;
+			line-height: 34px;
+		}
+
+		.main .swiper-box .swiper-container .swiper-slide a {
+			color: #fff;
+		}
+
+		.curr-news span {
+			display: inline-block;
+			color: #fff;
+			background: #d00;
+			padding: 5px 15px;
+			font-size: 16px;
+			height: 25px;
+			line-height: 25px;
+		}
+
+		.main .right-main .date-box span {
+			cursor: pointer;
+		}
+
+		.ribao,
+		.zhoubao,
+		.zazhi {
+			background: none;
+			padding: 10px 15px;
+			width: 140px;
+			z-index: 3;
+			position: absolute;
+			top: 60px;
+			left: -30px;
+			display: none;
+		}
+
+		.ribao li,
+		.zhoubao li,
+		.zazhi li {
+			border: 1px solid #e2e2e2;
+			color: #333;
+			padding: 3px 10px;
+			border-top: none;
+			width: 150px;
+			background: #fff;
+		}
+
+		.ribao li:nth-child(1),
+		.zhoubao li:nth-child(1),
+		.zazhi li:nth-child(1) {
+			border-top: 1px solid #e2e2e2;
+		}
+
+		.nav li {
+			cursor: pointer;
+		}
+
+		.ribao li a,
+		.zhoubao li a,
+		.zazhi li a {
+			color: #333;
+		}
+
+		.main .news .news-list li span {
+			font-size: 20px;
+			margin-right: 5px;
+		}
+
+		.main .article-box .art-btn span {
+			padding: 0 15px;
+		}
+
+		.main .article-box .art-btn strong {
+			font-weight: normal;
+			float: right;
+			margin-right: 15px;
+		}
+
+		.main .article-box .art-btn strong span {
+			padding: 0px;
+		}
+
+		.main .swiper-box .swiper-container .swiper-slide {
+			font-size: 12px;
+			width: 24.5%;
+		}
+		#ozoom p{
+			font-size: inherit;
+			line-height: 170%;
+			padding: 5px 0;
+		}
+
+		/* .main .swiper-box .swiper-container .swiper-slide:nth-child(4){
+        line-height:129%;padding:8px 1% 0 1%;height:36px;width:22.5%
+    } */
+		@media (min-device-width: 320px) and (max-width: 689px),
+		(max-device-width: 480px) {
+			body {
+				overflow: auto;
+			}
+		}
+	</style>
+<script type="text/javascript" referrerpolicy="no-referrer-when-downgrade" src="//d.webterren.com/common.js?z=15&amp;t=202304110258"></script></head>
+
+
+	<body onload="initialize();initMPPage();showArtPics();">
+		<!--题图-->
+		<div class="top">
+			<div class="w1000">
+				<a href="http://www.people.com.cn" target="_blank"><img class="left" src="../../../../../../testx/template/amucsite/projectPaper/rmPaper/files/logo.png" alt=""></a>
+				<ul class="right nav">
+					<li id="ribao">日报
+						<ul class="ribao" id="ribaobox">
+							<li><a href="http://paper.people.com.cn/rmrb/paperindex.htm" target="_blank">人民日报</a></li>
+							<li><a href="http://paper.people.com.cn/rmrbhwb/paperindex.htm" target="_blank">人民日报海外版</a>
+							</li>
+							<li><a href="http://www.huanqiu.com/" target="_blank">环球时报</a></li>
+							<li><a href="http://epaper.stcn.com/" target="_blank">证券时报</a></li>
+						</ul>
+					</li>
+					<li id="zhoubao">周报
+						<ul class="zhoubao" id="zhoubaobox">
+							<li><a href="http://paper.people.com.cn/gjjrb/paperindex.htm" target="_blank">国际金融报</a></li>
+							<li><a href="http://paper.people.com.cn/zgnyb/paperindex.htm" target="_blank">中国能源报</a></li>
+							<li><a href="http://paper.people.com.cn/jksb/paperindex.htm" target="_blank">健康时报</a></li>
+							<li><a href="http://paper.people.com.cn/fcyym/paperindex.htm" target="_blank">讽刺与幽默</a></li>
+							<li><a href="http://paper.people.com.cn/zgcsb/paperindex.htm" target="_blank">中国城市报</a></li>
+						</ul>
+
+					</li>
+					<li id="zazhi">杂志
+						<ul class="zazhi" id="zazhibox">
+							<li><a href="http://paper.people.com.cn/xwzx/paperindex.htm" target="_blank">新闻战线</a></li>
+							<li><a href="http://paper.people.com.cn/rmlt/paperindex.htm" target="_blank">人民论坛</a></li>
+							<li><a href="http://paper.people.com.cn/rmzk/paperindex.htm" target="_blank">人民周刊</a></li>
+							<li><a href="http://paper.people.com.cn/zgjjzk/paperindex.htm" target="_blank">中国经济周刊</a>
+							</li>
+							<li><a href="http://paper.people.com.cn/mszk/paperindex.htm" target="_blank">民生周刊</a></li>
+							<li><a href="https://www.gjrwls.com/" target="_blank">国家人文历史</a>
+							</li>
+							<li><a href="http://paper.people.com.cn/zgby/paperindex.htm" target="_blank">中国报业</a></li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+
+		</div>
+		<div class="main w1000">
+			<div class="left paper-box">
+				<div class="paper">
+					<map name="PagePicMap"><area coords="3.7387239999999995,88.41330525,194.413632,88.41330525,194.413632,332.96074200000004,3.7387239999999995,332.96074200000004" shape="polygon" href="content_30064797.html"><area coords="396.304712,55.17993250000001,396.304712,3.762271,205.629804,3.762271,205.629804,55.17993250000001,205.629804,77.753547,396.304712,77.753547" shape="polygon" href="content_30064798.html"><area coords="205.629804,88.41330525,396.304712,88.41330525,396.304712,271.51035974999996,205.629804,271.51035974999996" shape="polygon" href="content_30064799.html"><area coords="205.629804,280.9160315,396.304712,280.9160315,396.304712,436.42311975000007,205.629804,436.42311975000007" shape="polygon" href="content_30064800.html"><area coords="3.7387239999999995,342.36641375,194.413632,342.36641375,194.413632,482.1973805,3.7387239999999995,482.1973805" shape="polygon" href="content_30064801.html"><area coords="205.629804,445.8287915,396.304712,445.8287915,396.304712,571.237729,205.629804,571.237729" shape="polygon" href="content_30064802.html"><area coords="95.337456,521.074154,95.337456,492.8571445,95.337456,492.8571445,3.7387239999999995,492.8571445,3.7387239999999995,492.8571445,3.7387239999999995,521.074154,3.7387239999999995,571.237729,95.337456,571.237729" shape="polygon" href="content_30064803.html"><area coords="194.413632,521.074154,194.413632,492.8571445,194.413632,492.8571445,105.930504,492.8571445,105.930504,492.8571445,105.930504,521.074154,105.930504,571.237729,194.413632,571.237729" shape="polygon" href="content_30064804.html"></map>
+					<img width="400" height="575" src="../../../pic/202503/30/6750f165-eb94-47ad-8476-4b76375e3a87.jpg.2" border="0" usemap="#PagePicMap">
+				</div>
+				<div class="paper-bot">
+					<p class="left ban">
+						第01版：要闻
+					</p>
+					<!-- <p class="right btn">PDF下载</p> -->
+				</div>
+				<div class="news">
+					<p class="curr-news"><span>本版新闻</span></p>
+					<!--新样式-->
+					<ul class="news-list">
+								<li>
+									<span>·</span>
+									<a href="content_30064797.html"> “说到的就要做到，承诺的就要兑现”（总书记的人民情怀） </a>
+								</li>
+								<li>
+									<span>·</span>
+									<a href="content_30064798.html"> 习近平就缅甸遭受地震灾害向缅甸领导人敏昂莱致慰问电 </a>
+								</li>
+								<li>
+									<span>·</span>
+									<a href="content_30064799.html"> 确保学有质量、查有力度、改有成效（锲而不舍落实中央八项规定精神） </a>
+								</li>
+								<li>
+									<span>·</span>
+									<a href="content_30064800.html"> 浙江高质量推动农业转移人口市民化（“两重”建设扎实推进） </a>
+								</li>
+								<li>
+									<span>·</span>
+									<a href="content_30064801.html"> 不竭能源海上来（发展各具特色的县域经济） </a>
+								</li>
+								<li>
+									<span>·</span>
+									<a href="content_30064802.html"> 图片报道 </a>
+								</li>
+								<li>
+									<span>·</span>
+									<a href="content_30064803.html"> 非化石能源发电装机规模首次迈上20亿千瓦台阶 </a>
+								</li>
+								<li>
+									<span>·</span>
+									<a href="content_30064804.html"> 我国战略性新兴产业有效发明专利量达134.9万件 </a>
+								</li>
+					</ul>
+				</div>
+
+			</div>
+			<div class="right right-main">
+				<div class="date-box">
+					<p class="date left">
+						人民日报 <span class="newstime">2025年03月30日 星期日</span>
+						<span>
+							<img onclick="autoShowDate();" src="../../../../../../testx/template/amucsite/projectPaper/rmPaper/files/images/down.png" alt="">
+						</span>
+					</p>
+					<p class="right">
+
+					</p>
+					<!-------rqdh版面导航------>
+					<div id="daydh" style="display:none; position:absolute; left:140px;top:30px;z-index:1000; filter:alpha(opacity=90);" onmouseover="document.getElementById('daydh').style.display='block';">
+						<form name="CLD" style="padding:0px;margin:0px;">
+							<table width="210" border="0" cellpadding="0" cellspacing="1" bordercolor="#007CD2" bgcolor="#e0e0e0">
+								<tbody><tr>
+									<td bgcolor="#D8EFFF" style="padding: 3px;">
+										<table cellspacing="0" cellpadding="0" width="100%" align="center" border="0" bgcolor="#D8EFFF">
+											<tbody><tr>
+												<td>
+													<table width="100%" align="center" border="0" cellpadding="1" cellspacing="1">
+														<tbody><tr class="default" align="center">
+															<td height="15" colspan="7" bgcolor="#FFFFFF">
+																<table width="100%" border="0" cellpadding="2" cellspacing="0">
+																	<tbody><tr align="center">
+																		<td align="left" nowrap=""><img src="../../../../../../testx/template/amucsite/projectPaper/rmPaper/files/d1.gif" width="7" height="11" style="cursor:hand;" onclick="turnpage(SY,0)"></td>
+																		<td><select class="jumpmenu" onchange="changeMPCld()" name="SY">
+																				<script language="JavaScript">
+																					for (i = 2006; i < 2051; i++)
+																						document.write('<option>' + i + '</option>')
+																				</script><option>2022</option><option>2023</option><option>2024</option><option>2025</option>
+																			</select>
+																		</td>
+																		<td><img src="../../../../../../testx/template/amucsite/projectPaper/rmPaper/files/d.gif" width="7" height="11" style="cursor:hand;" onclick="turnpage(SY,1)"></td>
+																		<td align="center" nowrap=""><img src="../../../../../../testx/template/amucsite/projectPaper/rmPaper/files/d1.gif" width="7" height="11" style="cursor:hand;" onclick="turnpage(SM,0)"></td>
+																		<td><select class="jumpmenu" onchange="changeMPCld()" name="SM">
+																				<script language="JavaScript">
+																					for (i = 1; i < 13; i++) document.write('<option>' + i + '</option>')
+																				</script><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option><option>11</option><option>12</option>
+																			</select>
+																		</td>
+																		<td><img src="../../../../../../testx/template/amucsite/projectPaper/rmPaper/files/d.gif" width="7" height="11" style="cursor:hand;" onclick="turnpage(SM,1)"></td>
+																		<td align="right" nowrap=""><strong>
+																				<font id="GZ" fface="Arial, Helvetica, sans-serif">
+																				</font>
+																			</strong></td>
+																	</tr>
+																</tbody></table>
+															</td>
+														</tr>
+														<tr align="middle" bgcolor="#FFFFFF" class="default">
+															<td style="color: #fff;background: #d00;" align="center" class="fontstyle01"><b>
+																	<font face="Arial, Helvetica, sans-serif">日</font>
+																</b></td>
+															<td style="color: #fff;background: #d00;" align="center" class="fontstyle01"><b>
+																	<font face="Arial, Helvetica, sans-serif">一</font>
+																</b></td>
+															<td style="color: #fff;background: #d00;" align="center" class="fontstyle01"><b>
+																	<font face="Arial, Helvetica, sans-serif">二</font>
+																</b></td>
+															<td style="color: #fff;background: #d00;" align="center" class="fontstyle01"><b>
+																	<font face="Arial, Helvetica, sans-serif">三</font>
+																</b></td>
+															<td style="color: #fff;background: #d00;" align="center" class="fontstyle01"><b>
+																	<font face="Arial, Helvetica, sans-serif">四</font>
+																</b></td>
+															<td style="color: #fff;background: #d00;" align="center" class="fontstyle01"><b>
+																	<font face="Arial, Helvetica, sans-serif">五</font>
+																</b></td>
+															<td style="color: #fff;background: #d00;" align="center" class="fontstyle01"><b>
+																	<font face="Arial, Helvetica, sans-serif">六</font>
+																</b> </td>
+														</tr>
+														<script type="text/JavaScript">
+															var gNum;
+															for(i=0;i<6;i++)
+															{
+																document.write('<tr align=center>');
+																for(j=0;j<7;j++)
+																{
+																	gNum = i*7+j;
+																	document.write('<td  bgcolor="#FFFFFF" class="default" align=center id="GD' + gNum +'" style="cursor: default;" width="14%"><a href="" id="CD' + gNum + '"><span class="date" style="font-family:Verdana, Arial;font-size:11px;"><font _onMouseOver="mOvr(' + gNum +')" onMouseOut="mOut()" id="SD' + gNum +'"');
+																	document.write('></font></span></a><br><font id="LD' + gNum + '" size=2 class=pt9 style=display:none></font></td>');
+																}
+																document.write('</tr>');
+															}
+														</script><tr align="center"><td bgcolor="#FFFFFF" class="default" align="center" id="GD0" style="cursor: default;" width="14%"><a href="" id="CD0"><span class="date" style="font-family:Verdana, Arial;font-size:11px;"><font _onmouseover="mOvr(0)" onmouseout="mOut()" id="SD0" class=""></font></span></a><br><font id="LD0" size="2" class="pt9" style="display:none"></font></td><td bgcolor="#FFFFFF" class="default" align="center" id="GD1" style="cursor: default;" width="14%"><a href="" id="CD1"><span class="date" style="font-family:Verdana, Arial;font-size:11px;"><font _onmouseover="mOvr(1)" onmouseout="mOut()" id="SD1" class=""></font></span></a><br><font id="LD1" size="2" class="pt9" style="display:none"></font></td><td bgcolor="#FFFFFF" class="default" align="center" id="GD2" style="cursor: default;" width="14%"><a href="" id="CD2"><span class="date" style="font-family:Verdana, Arial;font-size:11px;"><font _onmouseover="mOvr(2)" onmouseout="mOut()" id="SD2" class=""></font></span></a><br><font id="LD2" size="2" class="pt9" style="display:none"></font></td><td bgcolor="#FFFFFF" class="default" align="center" id="GD3" style="cursor: default;" width="14%"><a href="" id="CD3"><span class="date" style="font-family:Verdana, Arial;font-size:11px;"><font _onmouseover="mOvr(3)" onmouseout="mOut()" id="SD3" class=""></font></span></a><br><font id="LD3" size="2" class="pt9" style="display:none"></font></td><td bgcolor="#FFFFFF" class="default" align="center" id="GD4" style="cursor: default;" width="14%"><a href="" id="CD4"><span class="date" style="font-family:Verdana, Arial;font-size:11px;"><font _onmouseover="mOvr(4)" onmouseout="mOut()" id="SD4" class=""></font></span></a><br><font id="LD4" size="2" class="pt9" style="display:none"></font></td><td bgcolor="#FFFFFF" class="default" align="center" id="GD5" style="cursor: default;" width="14%"><a href="" id="CD5"><span class="date" style="font-family:Verdana, Arial;font-size:11px;"><font _onmouseover="mOvr(5)" onmouseout="mOut()" id="SD5" class=""></font></span></a><br><font id="LD5" size="2" class="pt9" style="display:none"></font></td><td bgcolor="#FFFFFF" class="default" align="center" id="GD6" style="cursor: default;" width="14%"><a href="http://paper.people.com.cn/rmrb/pc/layout/202503/01/node_01.html" id="CD6"><span class="date" style="font-family:Verdana, Arial;font-size:11px;"><font _onmouseover="mOvr(6)" onmouseout="mOut()" id="SD6" class="" color="">1</font></span></a><br><font id="LD6" size="2" class="pt9" style="display:none">初四</font></td></tr><tr align="center"><td bgcolor="#FFFFFF" class="default" align="center" id="GD7" style="cursor: default;" width="14%"><a href="http://paper.people.com.cn/rmrb/pc/layout/202503/02/node_01.html" id="CD7"><span class="date" style="font-family:Verdana, Arial;font-size:11px;"><font _onmouseover="mOvr(7)" onmouseout="mOut()" id="SD7" class="" color="">2</font></span></a><br><font id="LD7" size="2" class="pt9" style="display:none">初五</font></td><td bgcolor="#FFFFFF" class="default" align="center" id="GD8" style="cursor: default;" width="14%"><a href="http://paper.people.com.cn/rmrb/pc/layout/202503/03/node_01.html" id="CD8"><span class="date" style="font-family:Verdana, Arial;font-size:11px;"><font _onmouseover="mOvr(8)" onmouseout="mOut()" id="SD8" class="" color="">3</font></span></a><br><font id="LD8" size="2" class="pt9" style="display:none">初六</font></td><td bgcolor="#FFFFFF" class="default" align="center" id="GD9" style="cursor: default;" width="14%"><a href="http://paper.people.com.cn/rmrb/pc/layout/202503/04/node_01.html" id="CD9"><span class="date" style="font-family:Verdana, Arial;font-size:11px;"><font _onmouseover="mOvr(9)" onmouseout="mOut()" id="SD9" class="" color="">4</font></span></a><br><font id="LD9" size="2" class="pt9" style="display:none">初七</font></td><td bgcolor="#FFFFFF" class="default" align="center" id="GD10" style="cursor: default;" width="14%"><a href="http://paper.people.com.cn/rmrb/pc/layout/202503/05/node_01.html" id="CD10"><span class="date" style="font-family:Verdana, Arial;font-size:11px;"><font _onmouseover="mOvr(10)" onmouseout="mOut()" id="SD10" class="" color="">5</font></span></a><br><font id="LD10" size="2" class="pt9" style="display:none">初八</font></td><td bgcolor="#FFFFFF" class="default" align="center" id="GD11" style="cursor: default;" width="14%"><a href="http://paper.people.com.cn/rmrb/pc/layout/202503/06/node_01.html" id="CD11"><span class="date" style="font-family:Verdana, Arial;font-size:11px;"><font _onmouseover="mOvr(11)" onmouseout="mOut()" id="SD11" class="" color="">6</font></span></a><br><font id="LD11" size="2" class="pt9" style="display:none">初九</font></td><td bgcolor="#FFFFFF" class="default" align="center" id="GD12" style="cursor: default;" width="14%"><a href="http://paper.people.com.cn/rmrb/pc/layout/202503/07/node_01.html" id="CD12"><span class="date" style="font-family:Verdana, Arial;font-size:11px;"><font _onmouseover="mOvr(12)" onmouseout="mOut()" id="SD12" class="" color="">7</font></span></a><br><font id="LD12" size="2" class="pt9" style="display:none">初十</font></td><td bgcolor="#FFFFFF" class="default" align="center" id="GD13" style="cursor: default;" width="14%"><a href="http://paper.people.com.cn/rmrb/pc/layout/202503/08/node_01.html" id="CD13"><span class="date" style="font-family:Verdana, Arial;font-size:11px;"><font _onmouseover="mOvr(13)" onmouseout="mOut()" id="SD13" class="" color="">8</font></span></a><br><font id="LD13" size="2" class="pt9" style="display:none">十一</font></td></tr><tr align="center"><td bgcolor="#FFFFFF" class="default" align="center" id="GD14" style="cursor: default;" width="14%"><a href="http://paper.people.com.cn/rmrb/pc/layout/202503/09/node_01.html" id="CD14"><span class="date" style="font-family:Verdana, Arial;font-size:11px;"><font _onmouseover="mOvr(14)" onmouseout="mOut()" id="SD14" class="" color="">9</font></span></a><br><font id="LD14" size="2" class="pt9" style="display:none">十二</font></td><td bgcolor="#FFFFFF" class="default" align="center" id="GD15" style="cursor: default;" width="14%"><a href="http://paper.people.com.cn/rmrb/pc/layout/202503/10/node_01.html" id="CD15"><span class="date" style="font-family:Verdana, Arial;font-size:11px;"><font _onmouseover="mOvr(15)" onmouseout="mOut()" id="SD15" class="" color="">10</font></span></a><br><font id="LD15" size="2" class="pt9" style="display:none">十三</font></td><td bgcolor="#FFFFFF" class="default" align="center" id="GD16" style="cursor: default;" width="14%"><a href="http://paper.people.com.cn/rmrb/pc/layout/202503/11/node_01.html" id="CD16"><span class="date" style="font-family:Verdana, Arial;font-size:11px;"><font _onmouseover="mOvr(16)" onmouseout="mOut()" id="SD16" class="" color="">11</font></span></a><br><font id="LD16" size="2" class="pt9" style="display:none">十四</font></td><td bgcolor="#FFFFFF" class="default" align="center" id="GD17" style="cursor: default;" width="14%"><a href="http://paper.people.com.cn/rmrb/pc/layout/202503/12/node_01.html" id="CD17"><span class="date" style="font-family:Verdana, Arial;font-size:11px;"><font _onmouseover="mOvr(17)" onmouseout="mOut()" id="SD17" class="" color="">12</font></span></a><br><font id="LD17" size="2" class="pt9" style="display:none">十五</font></td><td bgcolor="#FFFFFF" class="default" align="center" id="GD18" style="cursor: default;" width="14%"><a href="http://paper.people.com.cn/rmrb/pc/layout/202503/13/node_01.html" id="CD18"><span class="date" style="font-family:Verdana, Arial;font-size:11px;"><font _onmouseover="mOvr(18)" onmouseout="mOut()" id="SD18" class="" color="">13</font></span></a><br><font id="LD18" size="2" class="pt9" style="display:none">十六</font></td><td bgcolor="#FFFFFF" class="default" align="center" id="GD19" style="cursor: default;" width="14%"><a href="http://paper.people.com.cn/rmrb/pc/layout/202503/14/node_01.html" id="CD19"><span class="date" style="font-family:Verdana, Arial;font-size:11px;"><font _onmouseover="mOvr(19)" onmouseout="mOut()" id="SD19" class="" color="">14</font></span></a><br><font id="LD19" size="2" class="pt9" style="display:none">十七</font></td><td bgcolor="#FFFFFF" class="default" align="center" id="GD20" style="cursor: default;" width="14%"><a href="http://paper.people.com.cn/rmrb/pc/layout/202503/15/node_01.html" id="CD20"><span class="date" style="font-family:Verdana, Arial;font-size:11px;"><font _onmouseover="mOvr(20)" onmouseout="mOut()" id="SD20" class="" color="">15</font></span></a><br><font id="LD20" size="2" class="pt9" style="display:none">十八</font></td></tr><tr align="center"><td bgcolor="#FFFFFF" class="default" align="center" id="GD21" style="cursor: default;" width="14%"><a href="http://paper.people.com.cn/rmrb/pc/layout/202503/16/node_01.html" id="CD21"><span class="date" style="font-family:Verdana, Arial;font-size:11px;"><font _onmouseover="mOvr(21)" onmouseout="mOut()" id="SD21" class="" color="">16</font></span></a><br><font id="LD21" size="2" class="pt9" style="display:none">十九</font></td><td bgcolor="#FFFFFF" class="default" align="center" id="GD22" style="cursor: default;" width="14%"><a href="http://paper.people.com.cn/rmrb/pc/layout/202503/17/node_01.html" id="CD22"><span class="date" style="font-family:Verdana, Arial;font-size:11px;"><font _onmouseover="mOvr(22)" onmouseout="mOut()" id="SD22" class="" color="">17</font></span></a><br><font id="LD22" size="2" class="pt9" style="display:none">二十</font></td><td bgcolor="#FFFFFF" class="default" align="center" id="GD23" style="cursor: default;" width="14%"><a href="http://paper.people.com.cn/rmrb/pc/layout/202503/18/node_01.html" id="CD23"><span class="date" style="font-family:Verdana, Arial;font-size:11px;"><font _onmouseover="mOvr(23)" onmouseout="mOut()" id="SD23" class="" color="">18</font></span></a><br><font id="LD23" size="2" class="pt9" style="display:none">廿一</font></td><td bgcolor="#FFFFFF" class="default" align="center" id="GD24" style="cursor: default;" width="14%"><a href="http://paper.people.com.cn/rmrb/pc/layout/202503/19/node_01.html" id="CD24"><span class="date" style="font-family:Verdana, Arial;font-size:11px;"><font _onmouseover="mOvr(24)" onmouseout="mOut()" id="SD24" class="" color="">19</font></span></a><br><font id="LD24" size="2" class="pt9" style="display:none">廿二</font></td><td bgcolor="#FFFFFF" class="default" align="center" id="GD25" style="cursor: default;" width="14%"><a href="http://paper.people.com.cn/rmrb/pc/layout/202503/20/node_01.html" id="CD25"><span class="date" style="font-family:Verdana, Arial;font-size:11px;"><font _onmouseover="mOvr(25)" onmouseout="mOut()" id="SD25" class="" color="">20</font></span></a><br><font id="LD25" size="2" class="pt9" style="display:none">廿三</font></td><td bgcolor="#FFFFFF" class="default" align="center" id="GD26" style="cursor: default;" width="14%"><a href="http://paper.people.com.cn/rmrb/pc/layout/202503/21/node_01.html" id="CD26"><span class="date" style="font-family:Verdana, Arial;font-size:11px;"><font _onmouseover="mOvr(26)" onmouseout="mOut()" id="SD26" class="" color="">21</font></span></a><br><font id="LD26" size="2" class="pt9" style="display:none">廿四</font></td><td bgcolor="#FFFFFF" class="default" align="center" id="GD27" style="cursor: default;" width="14%"><a href="http://paper.people.com.cn/rmrb/pc/layout/202503/22/node_01.html" id="CD27"><span class="date" style="font-family:Verdana, Arial;font-size:11px;"><font _onmouseover="mOvr(27)" onmouseout="mOut()" id="SD27" class="" color="">22</font></span></a><br><font id="LD27" size="2" class="pt9" style="display:none">廿五</font></td></tr><tr align="center"><td bgcolor="#FFFFFF" class="default" align="center" id="GD28" style="cursor: default;" width="14%"><a href="http://paper.people.com.cn/rmrb/pc/layout/202503/23/node_01.html" id="CD28"><span class="date" style="font-family:Verdana, Arial;font-size:11px;"><font _onmouseover="mOvr(28)" onmouseout="mOut()" id="SD28" class="" color="">23</font></span></a><br><font id="LD28" size="2" class="pt9" style="display:none">廿六</font></td><td bgcolor="#FFFFFF" class="default" align="center" id="GD29" style="cursor: default;" width="14%"><a href="http://paper.people.com.cn/rmrb/pc/layout/202503/24/node_01.html" id="CD29"><span class="date" style="font-family:Verdana, Arial;font-size:11px;"><font _onmouseover="mOvr(29)" onmouseout="mOut()" id="SD29" class="" color="">24</font></span></a><br><font id="LD29" size="2" class="pt9" style="display:none">廿七</font></td><td bgcolor="#FFFFFF" class="default" align="center" id="GD30" style="cursor: default;" width="14%"><a href="http://paper.people.com.cn/rmrb/pc/layout/202503/25/node_01.html" id="CD30"><span class="date" style="font-family:Verdana, Arial;font-size:11px;"><font _onmouseover="mOvr(30)" onmouseout="mOut()" id="SD30" class="" color="">25</font></span></a><br><font id="LD30" size="2" class="pt9" style="display:none">廿八</font></td><td bgcolor="#FFFFFF" class="default" align="center" id="GD31" style="cursor: default;" width="14%"><a href="http://paper.people.com.cn/rmrb/pc/layout/202503/26/node_01.html" id="CD31"><span class="date" style="font-family:Verdana, Arial;font-size:11px;"><font _onmouseover="mOvr(31)" onmouseout="mOut()" id="SD31" class="" color="">26</font></span></a><br><font id="LD31" size="2" class="pt9" style="display:none">廿九</font></td><td bgcolor="#FFFFFF" class="default" align="center" id="GD32" style="cursor: default;" width="14%"><a href="http://paper.people.com.cn/rmrb/pc/layout/202503/27/node_01.html" id="CD32"><span class="date" style="font-family:Verdana, Arial;font-size:11px;"><font _onmouseover="mOvr(32)" onmouseout="mOut()" id="SD32" class="" color="">27</font></span></a><br><font id="LD32" size="2" class="pt9" style="display:none">三十</font></td><td bgcolor="#FFFFFF" class="default" align="center" id="GD33" style="cursor: default;" width="14%"><a href="http://paper.people.com.cn/rmrb/pc/layout/202503/28/node_01.html" id="CD33"><span class="date" style="font-family:Verdana, Arial;font-size:11px;"><font _onmouseover="mOvr(33)" onmouseout="mOut()" id="SD33" class="" color="">28</font></span></a><br><font id="LD33" size="2" class="pt9" style="display:none">三月</font></td><td bgcolor="#FFFFFF" class="default" align="center" id="GD34" style="cursor: default;" width="14%"><a href="http://paper.people.com.cn/rmrb/pc/layout/202503/29/node_01.html" id="CD34"><span class="date" style="font-family:Verdana, Arial;font-size:11px;"><font _onmouseover="mOvr(34)" onmouseout="mOut()" id="SD34" class="" color="">29</font></span></a><br><font id="LD34" size="2" class="pt9" style="display:none">初二</font></td></tr><tr align="center"><td bgcolor="#FFFFFF" class="default" align="center" id="GD35" style="cursor: default;" width="14%"><a href="http://paper.people.com.cn/rmrb/pc/layout/202503/30/node_01.html" id="CD35"><span class="date" style="font-family:Verdana, Arial;font-size:11px;"><font _onmouseover="mOvr(35)" onmouseout="mOut()" id="SD35" class="todaycolor" color="red">30</font></span></a><br><font id="LD35" size="2" class="pt9" style="display:none">初三</font></td><td bgcolor="#FFFFFF" class="default" align="center" id="GD36" style="cursor: default;" width="14%"><a href="#" id="CD36"><span class="date" style="font-family:Verdana, Arial;font-size:11px;"><font _onmouseover="mOvr(36)" onmouseout="mOut()" id="SD36" class="" color="#DFDEDB">31</font></span></a><br><font id="LD36" size="2" class="pt9" style="display:none"></font></td><td bgcolor="#FFFFFF" class="default" align="center" id="GD37" style="cursor: default;" width="14%"><a href="" id="CD37"><span class="date" style="font-family:Verdana, Arial;font-size:11px;"><font _onmouseover="mOvr(37)" onmouseout="mOut()" id="SD37" class=""></font></span></a><br><font id="LD37" size="2" class="pt9" style="display:none"></font></td><td bgcolor="#FFFFFF" class="default" align="center" id="GD38" style="cursor: default;" width="14%"><a href="" id="CD38"><span class="date" style="font-family:Verdana, Arial;font-size:11px;"><font _onmouseover="mOvr(38)" onmouseout="mOut()" id="SD38" class=""></font></span></a><br><font id="LD38" size="2" class="pt9" style="display:none"></font></td><td bgcolor="#FFFFFF" class="default" align="center" id="GD39" style="cursor: default;" width="14%"><a href="" id="CD39"><span class="date" style="font-family:Verdana, Arial;font-size:11px;"><font _onmouseover="mOvr(39)" onmouseout="mOut()" id="SD39" class=""></font></span></a><br><font id="LD39" size="2" class="pt9" style="display:none"></font></td><td bgcolor="#FFFFFF" class="default" align="center" id="GD40" style="cursor: default;" width="14%"><a href="" id="CD40"><span class="date" style="font-family:Verdana, Arial;font-size:11px;"><font _onmouseover="mOvr(40)" onmouseout="mOut()" id="SD40" class=""></font></span></a><br><font id="LD40" size="2" class="pt9" style="display:none"></font></td><td bgcolor="#FFFFFF" class="default" align="center" id="GD41" style="cursor: default;" width="14%"><a href="" id="CD41"><span class="date" style="font-family:Verdana, Arial;font-size:11px;"><font _onmouseover="mOvr(41)" onmouseout="mOut()" id="SD41" class=""></font></span></a><br><font id="LD41" size="2" class="pt9" style="display:none"></font></td></tr>
+													</tbody></table>
+												</td>
+											</tr>
+										</tbody></table>
+									</td>
+								</tr>
+								<tr>
+									<td align="center" height="22"><a href="#" onclick="autoShowDate();">关闭</a></td>
+								</tr>
+							</tbody></table>
+						</form>
+					</div>
+					<!-------rqdh版面导航END------>
+				</div>
+				<div class="swiper-box">
+					<div class="swiper-container">
+							<div class="swiper-slide">
+								<a id="pageLink" href="../../../layout/202503/30/node_01.html">01版：要闻</a>
+							</div>
+							<div class="swiper-slide">
+								<a id="pageLink" href="../../../layout/202503/30/node_02.html">02版：要闻</a>
+							</div>
+							<div class="swiper-slide">
+								<a id="pageLink" href="../../../layout/202503/30/node_03.html">03版：要闻</a>
+							</div>
+							<div class="swiper-slide">
+								<a id="pageLink" href="../../../layout/202503/30/node_04.html">04版：要闻</a>
+							</div>
+							<div class="swiper-slide">
+								<a id="pageLink" href="../../../layout/202503/30/node_05.html">05版：要闻</a>
+							</div>
+							<div class="swiper-slide">
+								<a id="pageLink" href="../../../layout/202503/30/node_06.html">06版：国防</a>
+							</div>
+							<div class="swiper-slide">
+								<a id="pageLink" href="../../../layout/202503/30/node_07.html">07版：人文</a>
+							</div>
+							<div class="swiper-slide">
+								<a id="pageLink" href="../../../layout/202503/30/node_08.html">08版：副刊</a>
+							</div>
+					</div>
+					<!-- <div class="swiper-button-prev"></div>
+					<div class="swiper-button-next"></div> -->
+				</div>
+				<div class="article-box">
+					<div class="art-btn">
+						<span>
+							<a href="../../../layout/202503/30/node_01.html">返回目录</a>
+						</span>
+						&nbsp;&nbsp;
+						<a href="javascript:;" onclick="zoomIn();">
+							<span class="big">放大</span>
+						</a>
+						<a href="javascript:;" onclick="zoomOut();">
+							<span class="small">缩小</span>
+						</a>
+						<a href="javascript:;" onclick="CopyAll();">
+							<span>全文复制</span>
+						</a>
+						&nbsp;&nbsp;&nbsp;
+						<strong>
+							&nbsp;&nbsp;
+								<a class="preart" href="content_30064798.html">
+									<span>下一篇 </span>
+								</a>
+						</strong>
+						<div style="display:none" id="articleContent">
+							<!--enpcontent-->
+ 
+ 
+  <p> 　　3月17日，习近平总书记来到贵州省黔东南苗族侗族自治州黎平县肇兴侗寨考察调研，和乡亲们围坐一起，聊家常、话振兴。</p>
+  <p>　　“改进调查研究”位列中央八项规定第一项，明确要求“向群众学习、向实践学习”。这些年，习近平总书记以上率下、身体力行，问需于民、问计于民，足迹遍布大江南北。</p>
+  <p>　　2012年12月4日，十八届中共中央政治局会议审议通过关于改进工作作风、密切联系群众的八项规定。会不会“一阵风”？能不能管得住？当时有人担心。</p>
+  <p>　　“各级领导干部要以身作则、率先垂范，说到的就要做到，承诺的就要兑现，中央政治局同志从我本人做起。”2013年1月22日，十八届中央纪委二次全会，总书记一席话，掷地有声。</p>
+  <p>　　铁规矩、硬杠杠！锲而不舍、说到做到。党的十八大以来，八项规定深刻改变中国，党风政风焕然一新，党心民心更加凝聚。</p>
+  <p>　　为何必须“说到做到”？关系人心向背，决定党和国家事业成败。</p>
+  <p>　　2013年7月11日，河北西柏坡，习近平总书记与平山县县乡村干部、老党员和群众代表座谈，听取反“四风”的意见建议。有同志直言困惑：“百姓生活在逐渐提高，为什么感觉和我们的距离反而有点远了？”</p>
+  <p>　　“60多年过去了……党面临的‘赶考’远未结束。”习近平总书记面色凝重、意味深长地说。</p>
+  <p>　　党的作风是党的形象，是观察人心向背的晴雨表。只有植根人民、造福人民，党才能始终立于不败之地，才能赢得民心。</p>
+  <p>　　“制定实施中央八项规定，是我们党在新时代的徙木立信之举，必须常抓不懈、久久为功，十年不够就二十年，二十年不够就三十年，直至真正化风成俗，以优良党风引领社风民风。”总书记一席话，清醒而坚定。</p>
+  <p>　　如何才能“说到做到”？始终坚持严的基调不动摇。</p>
+  <p>　　一次调研，走深走实。2019年4月15日，习近平总书记一早从北京出发，乘飞机抵达重庆，再转火车、换汽车，翻过一座座山、爬过一道道梁，一路奔波，来到石柱土家族自治县中益乡华溪村，“就是想实地了解‘两不愁三保障’是不是真落地”。</p>
+  <p>　　一句叮嘱，诠释决心。今年3月，习近平总书记在云南考察调研，要求各级党组织和广大党员、干部要“自觉增强学习教育的责任感紧迫感”“进一步吃透中央八项规定及其实施细则精神”。</p>
+  <p>　　党的十八大以来，习近平总书记始终带头严格执行中央八项规定，带动全党坚定不移推进自我革命。</p>
+  <p>　　“在改进作风问题上，我们不能退，也退不得”。</p>
+  <p>　　端午抓公款购买粽子等节礼、中秋抓公款购买月饼等节礼、春节抓公款购买爆竹等年货节礼……3月29日，中央纪委国家监委公布了2025年2月全国查处违反中央八项规定精神问题汇总情况。这是连续第138个月公布全国查处违反中央八项规定精神问题数据。</p>
+  <p>　　一个问题一个问题解决，一个节点一个节点坚守，让人民群众看到了实实在在的变化。</p>
+  <p>　　如何始终“说到做到”？不断加固中央八项规定堤坝。</p>
+  <p>　　2024年3月19日，习近平总书记在湖南考察时，前往常德市鼎城区谢家铺镇港中坪村党群服务中心了解当地为基层减负等情况。</p>
+  <p>　　听到村干部介绍手机上的微信工作群少了，习近平总书记指出：“党中央明确要求为基层减负，要坚决整治形式主义、官僚主义问题，精兵简政，持之以恒把这项工作抓下去。”</p>
+  <p>　　随着移动互联网技术的发展，形式主义从“办公桌”走向“指尖”，变味的“工作群”“政务APP”“PPT”让基层干部疲于应付。对此，中央层面整治形式主义为基层减负专项工作机制会议要求，着力纠治“指尖上的形式主义”，持续推动典型问题整改。</p>
+  <p>　　群众的眼睛是雪亮的，什么是形式主义、官僚主义，什么是真正为民办实事，一眼就能看出来。只有自觉抵制不良作风，牢牢坚持从群众中来、到群众中去，用心用情用力解决群众急难愁盼，才能暖人心、聚民心。</p>
+  <p>　　2022年10月27日，习近平总书记带领二十届中共中央政治局常委瞻仰延安革命纪念地。在延安革命纪念馆中，总书记驻足、端详、凝思：延安时期，“要求党的干部‘把屁股端端地坐在老百姓的这一面’，形成了‘只见公仆不见官’的生动局面”。</p>
+  <p>　　新时代的长征路上，还有许多“娄山关”“腊子口”。愈是闯关夺隘，愈要淬炼作风，走好新时代党的群众路线，密切党同人民群众血肉联系。</p>
+  <p>　　“中国人说话、中国共产党说话、中国共产党的领导说话是算数的！”人民群众对美好生活的向往，必将不断变成现实。 </p>
+ 
+
+						</div>
+					</div>
+					<div class="article">
+						<h3></h3>
+						<h1><p> “说到的就要做到，承诺的就要兑现”（总书记的人民情怀） </p></h1>
+						<h2></h2>
+						<p class="sec">
+							<!-- <span class="origin">人民日报</span>
+							<span class="date">(2020年02月06日 01版)</span> -->
+							本报记者  金正波
+							<span class="date">
+								《人民日报》（<span class="newstime">2025年03月30日</span>&nbsp;第&nbsp;01&nbsp;版）
+							</span>
+						</p>
+						<style>
+							.attachment {
+								margin-top: 20px;
+								text-align: center;
+							}
+							.attachment img{
+								margin:0 auto;
+							}
+							.attachment .att-content{
+								text-align:justify;
+								line-height: 140%;
+								width:90%;
+								font-size: 14px;
+								width:400px;
+								margin:10px auto 15px auto;
+							}
+						</style>
+						<div class="attachment">
+							<!--高级资源列表-->
+						</div>
+						<div id="ozoom">
+							<!--enpcontent-->
+ 
+ 
+  <p> 　　3月17日，习近平总书记来到贵州省黔东南苗族侗族自治州黎平县肇兴侗寨考察调研，和乡亲们围坐一起，聊家常、话振兴。</p>
+  <p>　　“改进调查研究”位列中央八项规定第一项，明确要求“向群众学习、向实践学习”。这些年，习近平总书记以上率下、身体力行，问需于民、问计于民，足迹遍布大江南北。</p>
+  <p>　　2012年12月4日，十八届中共中央政治局会议审议通过关于改进工作作风、密切联系群众的八项规定。会不会“一阵风”？能不能管得住？当时有人担心。</p>
+  <p>　　“各级领导干部要以身作则、率先垂范，说到的就要做到，承诺的就要兑现，中央政治局同志从我本人做起。”2013年1月22日，十八届中央纪委二次全会，总书记一席话，掷地有声。</p>
+  <p>　　铁规矩、硬杠杠！锲而不舍、说到做到。党的十八大以来，八项规定深刻改变中国，党风政风焕然一新，党心民心更加凝聚。</p>
+  <p>　　为何必须“说到做到”？关系人心向背，决定党和国家事业成败。</p>
+  <p>　　2013年7月11日，河北西柏坡，习近平总书记与平山县县乡村干部、老党员和群众代表座谈，听取反“四风”的意见建议。有同志直言困惑：“百姓生活在逐渐提高，为什么感觉和我们的距离反而有点远了？”</p>
+  <p>　　“60多年过去了……党面临的‘赶考’远未结束。”习近平总书记面色凝重、意味深长地说。</p>
+  <p>　　党的作风是党的形象，是观察人心向背的晴雨表。只有植根人民、造福人民，党才能始终立于不败之地，才能赢得民心。</p>
+  <p>　　“制定实施中央八项规定，是我们党在新时代的徙木立信之举，必须常抓不懈、久久为功，十年不够就二十年，二十年不够就三十年，直至真正化风成俗，以优良党风引领社风民风。”总书记一席话，清醒而坚定。</p>
+  <p>　　如何才能“说到做到”？始终坚持严的基调不动摇。</p>
+  <p>　　一次调研，走深走实。2019年4月15日，习近平总书记一早从北京出发，乘飞机抵达重庆，再转火车、换汽车，翻过一座座山、爬过一道道梁，一路奔波，来到石柱土家族自治县中益乡华溪村，“就是想实地了解‘两不愁三保障’是不是真落地”。</p>
+  <p>　　一句叮嘱，诠释决心。今年3月，习近平总书记在云南考察调研，要求各级党组织和广大党员、干部要“自觉增强学习教育的责任感紧迫感”“进一步吃透中央八项规定及其实施细则精神”。</p>
+  <p>　　党的十八大以来，习近平总书记始终带头严格执行中央八项规定，带动全党坚定不移推进自我革命。</p>
+  <p>　　“在改进作风问题上，我们不能退，也退不得”。</p>
+  <p>　　端午抓公款购买粽子等节礼、中秋抓公款购买月饼等节礼、春节抓公款购买爆竹等年货节礼……3月29日，中央纪委国家监委公布了2025年2月全国查处违反中央八项规定精神问题汇总情况。这是连续第138个月公布全国查处违反中央八项规定精神问题数据。</p>
+  <p>　　一个问题一个问题解决，一个节点一个节点坚守，让人民群众看到了实实在在的变化。</p>
+  <p>　　如何始终“说到做到”？不断加固中央八项规定堤坝。</p>
+  <p>　　2024年3月19日，习近平总书记在湖南考察时，前往常德市鼎城区谢家铺镇港中坪村党群服务中心了解当地为基层减负等情况。</p>
+  <p>　　听到村干部介绍手机上的微信工作群少了，习近平总书记指出：“党中央明确要求为基层减负，要坚决整治形式主义、官僚主义问题，精兵简政，持之以恒把这项工作抓下去。”</p>
+  <p>　　随着移动互联网技术的发展，形式主义从“办公桌”走向“指尖”，变味的“工作群”“政务APP”“PPT”让基层干部疲于应付。对此，中央层面整治形式主义为基层减负专项工作机制会议要求，着力纠治“指尖上的形式主义”，持续推动典型问题整改。</p>
+  <p>　　群众的眼睛是雪亮的，什么是形式主义、官僚主义，什么是真正为民办实事，一眼就能看出来。只有自觉抵制不良作风，牢牢坚持从群众中来、到群众中去，用心用情用力解决群众急难愁盼，才能暖人心、聚民心。</p>
+  <p>　　2022年10月27日，习近平总书记带领二十届中共中央政治局常委瞻仰延安革命纪念地。在延安革命纪念馆中，总书记驻足、端详、凝思：延安时期，“要求党的干部‘把屁股端端地坐在老百姓的这一面’，形成了‘只见公仆不见官’的生动局面”。</p>
+  <p>　　新时代的长征路上，还有许多“娄山关”“腊子口”。愈是闯关夺隘，愈要淬炼作风，走好新时代党的群众路线，密切党同人民群众血肉联系。</p>
+  <p>　　“中国人说话、中国共产党说话、中国共产党的领导说话是算数的！”人民群众对美好生活的向往，必将不断变成现实。 </p>
+ 
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="bottom">
+			<div class=" clearfix w1000">
+				<div class="copyright">
+					人 民 网 版 权 所 有 ，未 经 书 面 授 权 禁 止 使 用<br>
+					Copyright © 1997-2025 by www.people.com.cn all rights reserved
+				</div>
+			</div>
+		</div>
+		<div class="go-top" id="go-top">
+			<img src="../../../../../../testx/template/amucsite/projectPaper/rmPaper/files/go_top.png" alt="">
+		</div>
+		<script language="JavaScript">
+			document.write("<div id=detail style=position:absolute;width:300px;></div>");
+		</script><div id="detail" style="position:absolute;width:300px;"></div>
+		<script language="Javascript" src="../../../../../../testx/template/amucsite/projectPaper/rmPaper/files/disname2.js"></script>
+		<script language="Javascript" src="../../../../../../testx/template/amucsite/projectPaper/rmPaper/files/new.js"></script>
+		<script>
+
+updateMetaRmrb(location.href);
+			function updateMetaRmrb(webLastUrl) {
+				// console.log(webLastUrl)
+				var x = webLastUrl.indexOf('content_');
+				var y = webLastUrl.indexOf('.html');
+				
+				if (x >= 0) {
+					var publishdate = webLastUrl.substring(x-10, x);
+					publishdate = publishdate.substring(0, 4) + '-' + publishdate.substring(4, 6) + '-' + publishdate.substring(7, 9);
+					var contentid = 'rmrbdzb_' + webLastUrl.substring(x + 8, y);
+					showMetaRmrb(publishdate, contentid);
+				}
+			}
+			function showMetaRmrb(publishdate, contentid) {
+				var metas = document.getElementsByTagName('meta');
+				for (var i = 0; i < metas.length; i++) {
+					if ('contentid' == metas[i].name) {
+						metas[i].content = contentid;
+					} else if ('publishdate' == metas[i].name) {
+						metas[i].content = publishdate;
+					}
+				}
+			}
+
+
+			; (function () {
+				var _global;
+				let duration = 500;//时间参数
+				var plugin = {
+					tipNav: function (tipmain, tipsub) {
+						tipmain.addEventListener('mouseover', function () {
+							tipsub.style.display = 'block'
+						}, false);
+						tipmain.addEventListener('mouseout', function () {
+							tipsub.style.display = 'none'
+						}, false);
+					},
+					replayTop: function (tipmain) {
+						tipmain.addEventListener('click', function () {
+							let topSzie = document.documentElement.scrollTop;
+							let s = topSzie / 600 * 25;  //路程/时间=s *25每隔25ms秒 动的路程
+							let st = setInterval(function () {
+								topSzie -= s;
+								if (topSzie <= 0) {
+									topSzie = 0; //当l<=0时，设置l=0
+									clearInterval(st);
+								}
+								document.documentElement.scrollTop = topSzie;
+							}, 25)
+						}, false);
+
+					}
+				}
+				//赋值全局
+				_global = (function () { return this || (0, eval)('this'); }());
+				!('plugin' in _global) && (_global.plugin = plugin);
+
+			})(window)
+
+
+			var ribaoButton = document.getElementById('ribao');
+			var ribaoBox = document.getElementById('ribaobox');
+			var zhoubaoButton = document.getElementById('zhoubao');
+			var zhoubaoBox = document.getElementById('zhoubaobox');
+			var zazhiButton = document.getElementById('zazhi');
+			var zaizhiBox = document.getElementById('zazhibox');
+			var goTop = document.getElementById('go-top');
+
+			plugin.tipNav(ribaoButton, ribaoBox);
+			plugin.tipNav(zhoubaoButton, zhoubaoBox);
+			plugin.tipNav(zazhiButton, zaizhiBox);
+			plugin.replayTop(goTop);
+
+
+		</script>
+
+<script language="Javascript" src="../../../../../../testx/template/amucsite/projectPaper/rmPaper/files/webdig_test.js"></script><script id="tr_statobj" src="../../../../../../testx/template/amucsite/projectPaper/rmPaper/files/webdig.js?z=15" type="text/javascript"></script><script type="text/javascript"> wd_paramtracker('_wdxid=000000000000000000000000000000000000000000');</script>
+		<input type="hidden" id="paperID" value="1,921" style="">
+		<input type="hidden" id="siteID" value="1" style="">
+	
+
+
+</body></html>
