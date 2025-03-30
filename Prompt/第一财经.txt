@@ -1,0 +1,19 @@
+工作步骤:
+1. 请你查看第一财经网站首页“头条”板块，获取前3条新闻url
+2. 请你逐条进入上一步获得的url，阅读新闻标题和内容并总结，我需要新闻内容详情
+3. 请你汇总上述3条新闻的内容，制作今日新闻报告.
+
+报告格式要求：
+新闻1：
+<新闻标题>
+<来源URL>
+<新闻主要内容>：请用5-10句话汇总新闻内容
+
+规则：
+1.在提取头条新闻链接时请查看页面所有链接，并使用下方条件进行筛选：
+{
+  "script": "Array.from(document.querySelectorAll('a')).filter(a => {\n  const text = a.textContent.trim();\n  const href = a.href;\n  return text.length > 15 && href.includes('yicai.com') && !href.endsWith('/');\n}).slice(0, 5).map(a => ({ \n  href: a.href, \n  text: a.textContent.trim() \n}))"
+}
+2. 提取到的url，请你采用打开页面的方式确保读取到文章内容。
+3. 异常情况处理；打开页面链接时可以等待2s再进行操作，页面可能在打开中； 如果遇到广告影响操作可以点击关闭按钮
+3. 最后报告保存为word文档，命名为：Local_news_{date}.docs
