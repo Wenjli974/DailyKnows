@@ -7,3 +7,6 @@
 
 # Local env files
 .env*.local
+
+#img 文件夹
+img/
