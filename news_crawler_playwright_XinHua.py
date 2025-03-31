@@ -66,7 +66,8 @@ async def get_news_from_page(page, news_count, page_name, selector_strategy="def
                     const text = link.innerText.trim();
                     const href = link.getAttribute('href');
                     
-                    if (text && href && !href.includes('javascript:')) {
+                    // 添加标题长度检查，确保标题长度大于7个字
+                    if (text && text.length > 7 && href && !href.includes('javascript:')) {
                         newsLinks.push({
                             text: text,
                             href: href,
@@ -189,6 +190,7 @@ async def get_news_from_page(page, news_count, page_name, selector_strategy="def
             
         title = link['text']
         url = link['href']
+        
         
         # 确保URL是完整的
         if url and not url.startswith('http'):

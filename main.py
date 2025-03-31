@@ -88,7 +88,7 @@ def main():
     
     # 获取当前日期的中文格式
     date_str_cn = datetime.now().strftime("%Y年%m月%d日")
-    output_file = f"{date_str_cn} 新闻简报.docx"
+    output_file = f"D:/pythonProject/DailyKnows/DailyReport/{date_str_cn} 新闻简报.docx"
     
     if os.path.exists(output_file):
         logger.info(f"生成的新闻简报文件: {output_file}")

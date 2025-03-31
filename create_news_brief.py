@@ -55,6 +55,11 @@ def add_page_number(run):
     run._r.append(instrText)
     run._r.append(fldChar2)
 
+def set_font(run):
+    """设置微软雅黑字体"""
+    run.font.name = '微软雅黑'
+    run._element.rPr.rFonts.set(qn('w:eastAsia'), '微软雅黑')
+
 def create_news_brief(news_data, json_date_str):
     """创建新闻简报Word文档"""
     doc = Document()
@@ -73,7 +78,8 @@ def create_news_brief(news_data, json_date_str):
     header_para.alignment = WD_ALIGN_PARAGRAPH.RIGHT
     header_run = header_para.add_run('机密文件')
     header_run.font.size = Pt(9)
-    header_run.font.color.rgb = RGBColor(128, 128, 128)
+    header_run.font.color.rgb = RGBColor(0, 0, 0)
+    set_font(header_run)
     
     # 添加页脚
     footer = sections[0].footer
@@ -81,20 +87,21 @@ def create_news_brief(news_data, json_date_str):
     footer_para.alignment = WD_ALIGN_PARAGRAPH.CENTER
     footer_run = footer_para.add_run(f'第')
     footer_run.font.size = Pt(9)
+    set_font(footer_run)
     add_page_number(footer_run)
     footer_run = footer_para.add_run(f'页 | {json_date_str}')
     footer_run.font.size = Pt(9)
+    set_font(footer_run)
     
     # 添加标题
     title = doc.add_paragraph()
     title_run = title.add_run(f"{json_date_str} 新闻简报")
-    title_run.font.size = Pt(20)
+    title_run.font.size = Pt(11)
     title_run.font.bold = True
+    set_font(title_run)
     title.alignment = WD_ALIGN_PARAGRAPH.CENTER
-    title.space_after = Pt(20)
+    #title.space_after = Pt(20)
     
-    # 添加标题后的空行
-    doc.add_paragraph()
     
     # 根据category分类整理新闻
     china_news = [news for news in news_data if news['category'] == "中国新闻"]
@@ -117,47 +124,72 @@ def add_news_section(doc, section_title, news_list):
     # 添加部分标题
     section_heading = doc.add_paragraph()
     section_heading_run = section_heading.add_run(section_title)
-    section_heading_run.font.size = Pt(18)
+    section_heading_run.font.size = Pt(11)
     section_heading_run.font.bold = True
+    set_font(section_heading_run)
     section_heading.alignment = WD_ALIGN_PARAGRAPH.CENTER
-    section_heading.space_before = Pt(18)
-    section_heading.space_after = Pt(18)
+    #section_heading.space_before = Pt(18)
+    #section_heading.space_after = Pt(18)
     
-    # 添加section标题后的空行
-    doc.add_paragraph()
     
     # 添加新闻内容
     for news in news_list:
         # 添加标题
         title_p = doc.add_paragraph()
-        title_run = title_p.add_run(f"标题:{news['title']}")
-        title_run.font.size = Pt(12)
+        title_p.paragraph_format.space_after = Pt(0)
+        title_run = title_p.add_run(f"标题：{news['title']}")
+        title_run.font.size = Pt(9)
         title_run.font.bold = True
-        title_run.font.color.rgb = RGBColor(0, 51, 102)
+        title_run.font.color.rgb = RGBColor(0, 0, 0)
+        set_font(title_run)
         
         # 添加来源
         source_p = doc.add_paragraph()
-        source_run = source_p.add_run(f"来源:{news['source']}")
+        source_p.paragraph_format.space_after = Pt(0)
+        source_run = source_p.add_run(f"来源：{news['web']}")
         source_run.font.size = Pt(9)
-        source_run.font.italic = True
-        source_run.font.color.rgb = RGBColor(128, 128, 128)
+        source_run.font.bold = True
+        source_run.font.color.rgb = RGBColor(0, 0, 0)
+        set_font(source_run)
         
         # 添加摘要
         summary_p = doc.add_paragraph()
-        summary_p.paragraph_format.line_spacing_rule = WD_LINE_SPACING.ONE_POINT_FIVE
-        summary_p.paragraph_format.space_after = Pt(12)
-        summary_run = summary_p.add_run(f"摘要:{news['summary']}")
-        summary_run.font.size = Pt(11)
+        #summary_p.paragraph_format.line_spacing_rule = WD_LINE_SPACING.ONE_POINT_FIVE
+        summary_p.paragraph_format.space_after = Pt(0)
+        summary_run = summary_p.add_run(f"摘要：{news['summary']}")
+        summary_run.font.size = Pt(9)
+        set_font(summary_run)
         
         # 添加分隔线（除了最后一条新闻）
         if news != news_list[-1]:
             separator = doc.add_paragraph()
             separator.alignment = WD_ALIGN_PARAGRAPH.CENTER
-            separator.paragraph_format.space_before = Pt(6)
-            separator.paragraph_format.space_after = Pt(6)
-            separator_run = separator.add_run("----------------------------------------------------------------------------------------------------------------------")
-            separator_run.font.color.rgb = RGBColor(200, 200, 200)
-            doc.add_paragraph()
+            
+            # 设置行距为单倍行距（最小）
+            separator.paragraph_format.line_spacing_rule = WD_LINE_SPACING.SINGLE
+            separator.paragraph_format.line_spacing = 0.0
+            separator.paragraph_format.space_before = Pt(0)
+            separator.paragraph_format.space_after = Pt(0)
+            
+            # 使用正确的方式添加段落边框
+            p = separator._p  # 获取段落的XML元素
+            pPr = p.get_or_add_pPr()  # 获取段落属性
+            
+            # 创建边框元素
+            pBdr = OxmlElement('w:pBdr')
+            
+            # 创建底边框元素
+            bottom = OxmlElement('w:bottom')
+            bottom.set(qn('w:val'), 'single')
+            bottom.set(qn('w:sz'), '6')
+            bottom.set(qn('w:space'), '1')
+            bottom.set(qn('w:color'), '000000')
+            
+            # 添加底边框到边框集合
+            pBdr.append(bottom)
+            
+            # 添加边框集合到段落属性
+            pPr.append(pBdr)
 
 def send_news_brief_email(file_path, recipients, subject=None, body=None, sender=None, smtp_server=None, smtp_port=None, smtp_user=None, smtp_password=None):
     """发送新闻简报邮件
@@ -178,7 +210,7 @@ def send_news_brief_email(file_path, recipients, subject=None, body=None, sender
         subject = f"每日新闻简报 - {datetime.now().strftime('%Y年%m月%d日')}"
     
     if body is None:
-        body = f"尊敬的用户：\n\n附件是{datetime.now().strftime('%Y年%m月%d日')}的每日新闻简报，请查收。\n\n此邮件由系统自动发送，请勿回复。"
+        body = f"Dear：\n\n请查收附件，谢谢！\n\nBest regards, \n\nWenjin"
     
     # 确保recipients是列表
     if isinstance(recipients, str):
@@ -255,7 +287,7 @@ def main():
     email_config = {
         'sender': os.getenv('EMAIL_SENDER'),
         'smtp_server': os.getenv('EMAIL_SMTP_SERVER'),
-        'smtp_port': int(os.getenv('EMAIL_SMTP_PORT', 25)),  # 使用int()转换端口号为整数
+        'smtp_port': int(os.getenv('EMAIL_SMTP_PORT')),  # 使用int()转换端口号为整数
         'smtp_user': os.getenv('EMAIL_SMTP_USER'),
         'smtp_password': os.getenv('EMAIL_SMTP_PASSWORD'),
         'recipients': os.getenv('EMAIL_RECIPIENTS', '').split(',')  # 分割逗号分隔的收件人列表

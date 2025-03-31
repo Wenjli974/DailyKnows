@@ -45,11 +45,12 @@ def summarize_news(title, content):
         要求：
         1. 总结：用8句话以内对新闻进行提炼总结，忠于原文，保留重点信息(尤其是政策类描述,数字相关描述).
         2. 标签：从以下选项中选择最合适的一个标签："中国新闻"，"国际新闻"，"汽车相关"
-        
+        3. 网站：从以下选项中选择最合适的一个网站："新华网"，"人民日报"，"第一财经"
         以下是你需要输出的JSON格式：
         {{
             "总结": "这里是新闻总结内容",
-            "标签": "这里是新闻标签"
+            "标签": "这里是新闻标签",
+            "网站": "这里是新闻来源网站"
         }}
         
         请只输出JSON格式，不要有任何其他文字说明。
@@ -92,6 +93,7 @@ def process_news_file():
             result = summarize_news(news['title'], news['content'])
             news['summary'] = result["总结"]
             news['category'] = result["标签"]
+            news['web'] = result["网站"]
         
         # 保存结果到文件
         output_file =f'D:/pythonProject/DailyKnows/materials/Local_news_{date_str}_with_summary.json'

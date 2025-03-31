@@ -53,8 +53,8 @@ def extract_text_from_image(image_path):
             os.remove(processed_path)
         return ""
 
-def get_news_links(page, news_count=3):
-    page.goto("https://www.yicai.com/")
+def get_news_links(page, url, news_count=3):
+    page.goto(url)
     page.wait_for_load_state('networkidle')
     
     # 获取新闻链接
@@ -70,7 +70,7 @@ def get_news_links(page, news_count=3):
         }}));
     }}
     """)
-    print("获取到的链接：", links)
+    print(f"从 {url} 获取到的链接：", links)
     return links
 
 def capture_article_content(page, url, index):
@@ -195,7 +195,7 @@ def format_content(content):
     lines = [line for line in lines if len(line) > 1]  # 移除单字符行
     return '\n'.join(lines)
 
-def create_news_report(news_count=3):
+def create_news_report():
     date_str = datetime.now().strftime("%Y%m%d")
     filename = f'materials/Local_news_{date_str}.json'
     
@@ -222,12 +222,36 @@ def create_news_report(news_count=3):
         page = context.new_page()
         
         try:
-            links = get_news_links(page, news_count)
-            if not links:
+            # 要爬取的页面列表及对应的新闻数量
+            urls_config = [
+                {"url": "https://www.yicai.com/", "count": 5},  # 首页5条
+                {"url": "https://www.yicai.com/news/quanqiushichang/", "count": 2},  # 全球市场3条
+                {"url": "https://www.yicai.com/news/shijie/", "count": 3}  # 世界新闻3条
+            ]
+            
+            all_links = []
+            # 从每个页面获取新闻链接
+            for config in urls_config:
+                url = config["url"]
+                count = config["count"]
+                links = get_news_links(page, url, count)
+                all_links.extend(links)
+                print(f"从 {url} 获取了 {len(links)} 条新闻链接")
+            
+            if not all_links:
                 print("未获取到任何新闻链接！")
                 return None
             
-            for i, link in enumerate(links, 1):
+            # 记录已处理的链接，避免重复
+            processed_urls = set()
+            
+            for i, link in enumerate(all_links, 1):
+                # 避免重复处理同一链接
+                if link['href'] in processed_urls:
+                    print(f"跳过重复链接: {link['href']}")
+                    continue
+                
+                processed_urls.add(link['href'])
                 title, content, full_page_path, content_path = capture_article_content(page, link['href'], i)
                 
                 # 格式化文章内容
@@ -248,18 +272,15 @@ def create_news_report(news_count=3):
     with open(filename, 'w', encoding='utf-8') as f:
         json.dump(json_data, f, ensure_ascii=False, indent=4)
     
-    print(f"\n报告生成完成，包含 {len(links)} 条新闻")
+    print(f"\n报告生成完成，包含 {len(processed_urls)} 条新闻")
     return filename
 
 if __name__ == "__main__":
     # 设置Tesseract路径（根据实际安装路径修改）
     pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
     
-    # 设置要获取的新闻数量（可以修改为3或5）
-    NEWS_COUNT = 5  
-    
     try:
-        filename = create_news_report(NEWS_COUNT)
+        filename = create_news_report()
         if filename:
             print(f"新闻报告已保存为：{filename}")
         else:
