@@ -75,12 +75,12 @@ run_daily_task.bat
 
 ```mermaid
 graph TD
-    A[调度器 run_daily_task.bat] --> B[主程序 main.py]
-    B --> C1[人民日报爬虫]
-    B --> C2[第一财经爬虫]
-    B --> C3[新华网爬虫]
-    B --> C4[澎湃新闻爬虫]
-    B --> C5[盖世汽车爬虫]
+    A[调度器 schedule_task.bat] --> B[主程序 main.py]
+    B --> C1[A网站新闻]
+    B --> C2[B网站新闻]
+    B --> C3[C网站新闻]
+    B --> C4[D网站新闻]
+    B --> C5[E网站新闻]
     C1 --> D[原始新闻数据]
     C2 --> D
     C3 --> D
