@@ -128,14 +128,14 @@ def capture_article_content(page, url, index):
         #time.sleep(2)  # 额外等待时间
         
         # 截图部分 - 无论是否成功获取内容都进行截图
-        full_page_path = f"img/news_{index}_full_{datetime.now().strftime('%H%M%S')}.png"
+        full_page_path = f"D:/pythonProject/DailyKnows/img/news_{index}_full_{datetime.now().strftime('%H%M%S')}.png"
         page.screenshot(path=full_page_path, full_page=True)
         print(f"保存整页截图: {full_page_path}")
         
         content_path = None
         if article_content:
             # 如果找到了内容区域，截取该区域
-            content_path = f"img/news_{index}_content_{datetime.now().strftime('%H%M%S')}.png"
+            content_path = f"D:/pythonProject/DailyKnows/img/news_{index}_content_{datetime.now().strftime('%H%M%S')}.png"
             article_content.screenshot(path=content_path)
             print(f"保存文章区域截图: {content_path}")
         
@@ -197,7 +197,7 @@ def format_content(content):
 
 def create_news_report():
     date_str = datetime.now().strftime("%Y%m%d")
-    filename = f'materials/Local_news_{date_str}.json'
+    filename = f'D:/pythonProject/DailyKnows/materials/Local_news_{date_str}.json'
     
     # 检查今日的JSON文件是否存在
     json_data = []
@@ -224,9 +224,9 @@ def create_news_report():
         try:
             # 要爬取的页面列表及对应的新闻数量
             urls_config = [
-                {"url": "https://www.yicai.com/", "count": 5},  # 首页5条
+                #{"url": "https://www.yicai.com/", "count": 5},  # 首页5条
                 {"url": "https://www.yicai.com/news/quanqiushichang/", "count": 2},  # 全球市场3条
-                {"url": "https://www.yicai.com/news/shijie/", "count": 3}  # 世界新闻3条
+                {"url": "https://www.yicai.com/news/shijie/", "count": 2}  # 世界新闻2条
             ]
             
             all_links = []

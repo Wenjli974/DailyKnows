@@ -76,7 +76,7 @@ def create_news_brief(news_data, json_date_str):
     header = sections[0].header
     header_para = header.paragraphs[0]
     header_para.alignment = WD_ALIGN_PARAGRAPH.RIGHT
-    header_run = header_para.add_run('机密文件')
+    header_run = header_para.add_run(' ')
     header_run.font.size = Pt(9)
     header_run.font.color.rgb = RGBColor(0, 0, 0)
     set_font(header_run)
@@ -110,12 +110,44 @@ def create_news_brief(news_data, json_date_str):
     
     # 添加第一部分：国内新闻
     add_news_section(doc, "一: 综合热点新闻(国内)", china_news)
-    
+    #添加分页符
+    doc.add_page_break()
+
     # 添加第二部分：国际新闻
     add_news_section(doc, "二: 综合热点新闻(国际)", international_news)
+    doc.add_page_break()
     
     # 添加第三部分：汽车类新闻
     add_news_section(doc, "三: 汽车类热点新闻", auto_news)
+    
+    # 添加汽车相关企业股市情况
+    # 获取当前日期，替换YYYY年MM月DD日
+    current_date = datetime.now().strftime("%Y年%m月%d日")
+    
+    # 添加标题
+    title_p = doc.add_paragraph()
+    title_p.paragraph_format.space_after = Pt(0)
+    title_run = title_p.add_run(f"标题：{current_date}汽车相关企业股市情况")
+    title_run.font.size = Pt(9)
+    title_run.font.bold = True
+    title_run.font.color.rgb = RGBColor(0, 0, 0)
+    set_font(title_run)
+    
+    # 添加来源
+    source_p = doc.add_paragraph()
+    source_p.paragraph_format.space_after = Pt(0)
+    source_run = source_p.add_run("来源：百度")
+    source_run.font.size = Pt(9)
+    source_run.font.bold = True
+    source_run.font.color.rgb = RGBColor(0, 0, 0)
+    set_font(source_run)
+    
+    # 添加摘要
+    summary_p = doc.add_paragraph()
+    summary_p.paragraph_format.space_after = Pt(0)
+    summary_run = summary_p.add_run("摘要：见下图")
+    summary_run.font.size = Pt(9)
+    set_font(summary_run)
     
     return doc
 

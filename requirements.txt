@@ -6,4 +6,8 @@ playwright==1.41.2
 opencv-python==4.9.0.80
 python-dotenv==1.0.0
 openai==1.10.0
-schedule==1.2.0 
+schedule==1.2.0
+pyautogui>=0.9.53
+pywin32>=305
+pillow>=9.0.0
+opencv-python>=4.5.0 

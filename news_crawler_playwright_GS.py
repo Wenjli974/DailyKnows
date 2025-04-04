@@ -37,12 +37,12 @@ def extract_text_from_image(image_path):
 
 # 从页面获取新闻列表
 async def get_news_from_page(page):
-    print("正在从新华社网站获取新闻...")
+    print("正在从盖世汽车网站获取新闻...")
     
     # 截图保存，便于调试
-    screenshot_path = "img/xinhua_page.png"
+    screenshot_path = "img/gasgoo_page.png"
     await page.screenshot(path=screenshot_path)
-    print(f"已保存新华社网页截图到 {screenshot_path}")
+    print(f"已保存盖世汽车网页截图到 {screenshot_path}")
     
     # 使用JavaScript提取页面所有新闻链接
     links = await page.evaluate('''() => {
@@ -59,25 +59,17 @@ async def get_news_from_page(page):
             // 确保链接有标题且不是JavaScript链接
             if (text && text.length > 5 && href && !href.includes('javascript:') && !seenLinks.has(href)) {
                 // 判断标题是否像新闻标题（不包含菜单项等）
-                const isNewsTitle = text.length > 7 && 
+                const isNewsTitle = text.length > 10 && 
                                    !text.includes('登录') && 
                                    !text.includes('注册') &&
+                                   !text.includes('Gasgoo night') &&
                                    !text.includes('首页');
                 
                 if (isNewsTitle) {
                     seenLinks.add(href);
                     
                     // 构建完整URL
-                    let fullLink = href;
-                    if (!href.startsWith('http')) {
-                        if (href.startsWith('//')) {
-                            fullLink = `https:${href}`;
-                        } else if (href.startsWith('/')) {
-                            fullLink = `https://www.xinhuanet.com${href}`;
-                        } else {
-                            fullLink = `https://www.xinhuanet.com/${href}`;
-                        }
-                    }
+                    const fullLink = href.startsWith('http') ? href : `https://auto.gasgoo.com${href}`;
                     
                     newsLinks.push({
                         title: text,
@@ -91,7 +83,7 @@ async def get_news_from_page(page):
         return newsLinks;
     }''')
     
-    print(f"共找到 {len(links)} 条新华社新闻")
+    print(f"共找到 {len(links)} 条盖世汽车新闻")
     return links
 
 # 从新闻URL获取内容
@@ -107,12 +99,13 @@ async def get_news_content(context, news_data):
         news_page = await context.new_page()
         try:
             await news_page.goto(news['url'], timeout=50000)
+            await news_page.wait_for_load_state('domcontentloaded')
             
             # 截图保存整个页面
-            content_screenshot_path = f"img/xinhua_news_{i+1}_content.png"
+            content_screenshot_path = f"img/gasgoo_news_{i+1}_content.png"
             
             # 尝试找到内容区域并截图
-            content_area = await news_page.query_selector('.article, .content, #detail, .main-aticle, .main')
+            content_area = await news_page.query_selector('.article-content, .content, .article-body, .main-content')
             if content_area:
                 await content_area.screenshot(path=content_screenshot_path)
                 print(f"已保存文章内容区域截图到 {content_screenshot_path}")
@@ -125,9 +118,8 @@ async def get_news_content(context, news_data):
             content = await news_page.evaluate('''() => {
                 // 尝试查找可能的文章内容容器
                 const selectors = [
-                    '.article', '.content', '.main-aticle', '#detail', 
-                    '.article-body', '.main', '.center-part', '.article-content',
-                    'p.text', '.text', '.textBody', '.main-content'
+                    '.article-content', '.content', '.article-body', '.main-content',
+                    '.article', '.news-content', '.detail-content', '.detail'
                 ];
                 
                 for (const selector of selectors) {
@@ -236,9 +228,9 @@ def save_news_to_json(final_news_data):
             json.dump(final_news_data, f, ensure_ascii=False, indent=4)
         print(f"\n已将新闻数据保存到: {json_filename}")
 
-async def main(news_count=5):
+async def main(news_count=8):
     """
-    主函数：从新华社首页获取新闻
+    主函数：从盖世汽车网站获取新闻
     
     参数:
     news_count: 获取的新闻数量
@@ -255,32 +247,31 @@ async def main(news_count=5):
         os.makedirs("img", exist_ok=True)
         
         try:
-            # 打开新华社首页
+            # 打开盖世汽车网页
             page = await context.new_page()
-            print("正在打开新华社网站...")
-            await page.goto('https://www.xinhuanet.com/', timeout=60000)
+            print("正在打开盖世汽车网站...")
+            await page.goto('https://auto.gasgoo.com/', timeout=60000)
             await page.wait_for_load_state('domcontentloaded')
             await page.wait_for_load_state('networkidle')
                 
             # 获取新闻列表
             news_list = await get_news_from_page(page)
             print(news_list)
-            print(f"从新华社网站获取了 {len(news_list)} 条新闻")
+            print(f"从盖世汽车网站获取了 {len(news_list)} 条新闻")
             
             # 准备输入给大模型的文本
             news_list_text = "\n".join([f"{i+1}. {item['title']} - {item['url']}" for i, item in enumerate(news_list)])
             
             # 使用大模型挑选最重要的新闻
-            selection_criteria = f"""你是一个新闻分析助手，擅长判断新闻重要性。
-            请从以下新闻列表中选出最重要的{news_count}条新闻，判断角度如下：
+            selection_criteria = f"""你是一个汽车行业新闻分析助手，擅长判断汽车行业新闻重要性。
+            请从以下汽车行业新闻列表中选出最重要的{news_count}条新闻，判断角度如下：
             1. 国内政策及新闻通知
-            2. 重大政治事件
-            3. 国内经济政策变化
-            4. 社会民生重要信息
+            2. 汽车行业重要新闻
+            3. 企业重大动向
+            4. 市场营销战略
+            5. 国际汽车行业发展趋势
             
-            注意：
-            1. 涉及国家领导人的活动和发言的新闻不需要选出！
-            2. 请保证挑选出的新闻在内容上具有代表性，不要挑选重复的新闻。
+            注意：请保证挑选出的新闻在内容上具有代表性，不要挑选重复的新闻。
 
             新闻列表:
             {news_list_text}
@@ -308,7 +299,7 @@ async def main(news_count=5):
                 response = client.chat.completions.create(
                     model="gpt-4o", # 或其他可用的模型
                     messages=[
-                        {"role": "system", "content": "你是一个新闻分析助手，擅长判断新闻重要性，尤其是国内重要政策和通知。"},
+                        {"role": "system", "content": "你是一个汽车行业新闻分析助手，擅长判断汽车新闻重要性。"},
                         {"role": "user", "content": selection_criteria}
                     ],
                     response_format={"type": "json_object"}
@@ -337,8 +328,8 @@ async def main(news_count=5):
                     print(f"URL: {news['source']}")
                     
                     # 只显示内容的前200个字符
-                    content_preview = news.get('content', '')[:200] + '...' if len(news.get('content', '')) > 200 else news.get('content', '')
-                    print(f"内容预览: {content_preview}")
+                    #content_preview = news.get('content', '')[:200] + '...' if len(news.get('content', '')) > 200 else news.get('content', '')
+                    #print(f"内容预览: {content_preview}")
                 
                 # 保存新闻数据
                 save_news_to_json(news_content)
@@ -359,5 +350,5 @@ async def main(news_count=5):
 
 if __name__ == "__main__":
     # 设置获取的新闻数量
-    news_count = 3  # 获取的新闻数量
-    asyncio.run(main(news_count)) 
+    news_count = 8  # 获取的新闻数量
+    asyncio.run(main(news_count))

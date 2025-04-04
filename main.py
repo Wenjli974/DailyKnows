@@ -33,7 +33,7 @@ def run_script(script_name, description):
             ["python", script_name], 
             check=True, 
             text=True, 
-            capture_output=True
+            #capture_output=True
         )
         
         execution_time = time.time() - start_time
@@ -56,17 +56,26 @@ def main():
     date_str = datetime.now().strftime("%Y%m%d")
     logger.info(f"当前处理日期: {date_str}")
     
-    # 1. 执行第一财经新闻爬虫
+    
+    # 1. 执行人民日报新闻爬虫 - 国内1条
+    if not run_script("news_crawler_playwright_RMRB.py", "人民日报新闻爬虫"):
+        logger.warning("人民日报新闻爬虫执行失败，但流程将继续")
+
+    # 2. 执行第一财经新闻爬虫 - 国际4条
     if not run_script("news_crawler_playwright_DYCJ.py", "第一财经新闻爬虫"):
         logger.warning("第一财经新闻爬虫执行失败，但流程将继续")
     
-    # 2. 执行人民日报新闻爬虫
-    if not run_script("news_crawler_playwright_RMRB.py", "人民日报新闻爬虫"):
-        logger.warning("人民日报新闻爬虫执行失败，但流程将继续")
+    # 3. 执行新华社新闻爬虫 - 国内3条
+    if not run_script("news_crawler_playwright_XinHua.py", "新华社新闻爬虫"):
+        logger.warning("新华社新闻爬虫执行失败，但流程将继续")
+
+    # 4. 执行澎湃网新闻爬虫 - 总计8条
+    if not run_script("news_crawler_playwright_PPXW.py", "澎湃新闻爬虫"):
+        logger.warning("澎湃新闻爬虫执行失败，但流程将继续")
     
-    # 2. 执行新华网新闻爬虫
-    if not run_script("news_crawler_playwright_XinHua.py", "新华网新闻爬虫"):
-        logger.warning("新华网新闻爬虫执行失败，但流程将继续")
+    # 5. 执行盖世汽车新闻爬虫 - 汽车8条
+    if not run_script("news_crawler_playwright_GS.py", "盖世汽车新闻爬虫"):
+        logger.warning("盖世汽车新闻爬虫执行失败，但流程将继续")
     
     # 暂停一下，确保文件已正确写入
     time.sleep(2)
