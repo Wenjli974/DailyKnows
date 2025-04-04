@@ -89,7 +89,6 @@ graph TD
     D -->|存储在 materials/| E[新闻摘要生成 news_summary_llm.py]
     E -->|调用GPT-4o接口| F[新闻摘要数据]
     F --> G[简报生成 create_news_brief.py]
-    H[汽车股票分析 company_share.py] --> G
     G --> I[Word格式新闻简报]
     I -->|存储在 DailyReport/| J[最终输出]
 ```
@@ -97,16 +96,15 @@ graph TD
 ## 技术栈
 
 - Playwright - 用于自动化网页爬取
-- OpenAI GPT-4o - 用于新闻摘要生成和股票数据分析
+- OpenAI GPT-4o - 用于新闻摘要生成
 - python-docx - 用于生成Word文档
 - OpenCV与PyTesseract - 用于图像处理和OCR识别
-- PyAutoGUI - 用于自动化控制桌面应用程序(同花顺)
+- PyAutoGUI - 用于自动化控制桌面应用程序
 
 ## 注意事项
 
 - 请确保API密钥和各项配置正确设置
 - 网络爬虫使用请遵守相关网站的使用条款和robots.txt规则
-- 股票数据分析功能需要安装同花顺软件并正确配置
 - 生成的新闻简报仅供个人参考，请勿用于商业用途
 
 ## 许可证
