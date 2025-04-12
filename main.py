@@ -56,7 +56,16 @@ def main():
     date_str = datetime.now().strftime("%Y%m%d")
     logger.info(f"当前处理日期: {date_str}")
     
+    #检查是否存在当天的新闻json文件
+    news_json_file = f"D:/pythonProject/DailyKnows/materials/Local_news_{date_str}.json"
+    #如果存在，删除该文档运行之后的程序，如果不存在，则运行之后的程序
+    if os.path.exists(news_json_file):
+        logger.info("存在当天的新闻json文件，删除该文档")
+        os.remove(news_json_file)
+    else:
+        logger.info("不存在当天的新闻json文件，运行之后的程序")
     
+
     # 1. 执行人民日报新闻爬虫 - 国内1条
     if not run_script("news_crawler_playwright_RMRB.py", "人民日报新闻爬虫"):
         logger.warning("人民日报新闻爬虫执行失败，但流程将继续")

@@ -17,10 +17,10 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # 获取OpenAI API密钥
-api_key = os.getenv("OPENAI_API_KEY")
+api_key = os.getenv("DEEPSEEK_API_KEY")
 
 # 初始化OpenAI客户端
-client = OpenAI(api_key=api_key)
+client = OpenAI(api_key=api_key,base_url="https://api.deepseek.com")
 
 def summarize_news(title, content, source):
     """
@@ -44,12 +44,15 @@ def summarize_news(title, content, source):
         内容：{cleaned_content}
         
         要求：
-        1. 总结：用8句话以内对新闻进行提炼总结，忠于原文，保留重点信息(尤其是政策类描述,数字相关描述).
+        1. 总结：请对新闻进行提炼总结，忠于原文，保留重点信息(关于政策类描述,数字量化描述,日期时间,注意需要保留！)
         2. 标签：请结合新闻的标题和内容，为新闻从以下选项中选择最合适的一个标签："中国新闻"，"汽车相关","国际新闻"，
         3. 网站：从以下选项中选择最合适的一个网站："澎湃新闻"，"人民日报"，"第一财经","盖世汽车"
         
         注意：
-        1.新闻标签中：如果行动主体是中国/国内，则标签为"中国新闻"，如果包含汽车行业或提及汽车企业相关内容，则标签为"汽车相关", 如果行动主体是外国/国际，则标签为"国际新闻"。
+        1.新闻标签中：
+        如果行动主体是中国/国内，则标签为"中国新闻"，
+        如果包含汽车行业,提及汽车企业相关内容或者来源网站为盖世汽车,不管是国内/国外主体行为，均标签为"汽车相关", 
+        如果行动主体是外国/国际且非汽车行业内容，则标签为"国际新闻"。
         2.网站需要参考来源URL中的信息：
         人民日报：http://paper.people.com.cn/
         第一财经：https://www.yicai.com/
@@ -68,13 +71,14 @@ def summarize_news(title, content, source):
         """
         
         response = client.chat.completions.create(
-            model="gpt-4o",
+            model="deepseek-chat",
             messages=[
                 {"role": "system", "content": "你是一个专业的新闻分析AI助手，擅长新闻内容总结和分类。请以JSON格式输出结果。"},
                 {"role": "user", "content": user_prompt}
             ],
             temperature=0.1,
             max_tokens=1000,
+            stream=False,
             response_format={"type": "json_object"}
         )
         

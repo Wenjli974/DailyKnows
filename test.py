@@ -5,17 +5,23 @@ import os
 load_dotenv()
 
 
-api_key = os.getenv("OPENAI_API_KEY")
+# 获取OpenAI API密钥
+api_key = os.getenv("DEEPSEEK_API_KEY")
+
+# 初始化OpenAI客户端
+client = OpenAI(api_key=api_key,base_url="https://api.deepseek.com")
 
             
 # 初始化OpenAI客户端
-client = OpenAI(api_key=api_key,http_client=None)
+#client = OpenAI(api_key=api_key,http_client=None)
 
    # 添加一个简单的API调用测试
 response = client.chat.completions.create(
-    model="gpt-3.5-turbo",
+    model="deepseek-chat",
     messages=[
-           {"role": "user", "content": "你好，世界！"}
-       ]
-   )
+        {"role": "system", "content": "You are a helpful assistant"},
+        {"role": "user", "content": "Hello"},
+    ],
+    stream=False
+)
 print(response.choices[0].message.content)
