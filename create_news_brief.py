@@ -30,6 +30,8 @@ def load_news_data(file_path):
     except Exception as e:
         print(f"加载JSON文件时出错：{e}")
         return None
+    
+
 
 def create_element(name):
     """创建XML元素"""
@@ -60,7 +62,7 @@ def set_font(run):
     run.font.name = '微软雅黑'
     run._element.rPr.rFonts.set(qn('w:eastAsia'), '微软雅黑')
 
-def create_news_brief(news_data, json_date_str):
+def create_news_brief(news_data, json_date_str, date_hour):
     """创建新闻简报Word文档"""
     doc = Document()
     
@@ -95,7 +97,11 @@ def create_news_brief(news_data, json_date_str):
     
     # 添加标题
     title = doc.add_paragraph()
-    title_run = title.add_run(f"{json_date_str} 新闻简报")
+    #如果date_hour是0-12点，则添加新闻早报，如果是12-24点，则添加新闻晚报
+    if date_hour >= "00" and date_hour <= "12":
+        title_run = title.add_run(f"{json_date_str} 新闻早报")  
+    elif date_hour >= "12" and date_hour <= "24":
+        title_run = title.add_run(f"{json_date_str} 新闻晚报")
     title_run.font.size = Pt(11)
     title_run.font.bold = True
     set_font(title_run)
@@ -104,10 +110,11 @@ def create_news_brief(news_data, json_date_str):
     
     
     # 根据category分类整理新闻
-    china_news = [news for news in news_data if news['category'] == "中国新闻"]
-    international_news = [news for news in news_data if news['category'] == "国际新闻"]
-    auto_news = [news for news in news_data if news['category'] == "汽车相关"]
-    
+    china_news = [news for news in news_data if news['category'] == "中国新闻" and news['is_duplicate'] == "否"]
+    international_news = [news for news in news_data if news['category'] == "国际新闻" and news['is_duplicate'] == "否"]
+    auto_news = [news for news in news_data if news['category'] == "汽车相关" and news['is_duplicate'] == "否"]
+    duplicate_news = [news for news in news_data if news['is_duplicate'] != "否"]
+
     # 添加第一部分：国内新闻
     add_news_section(doc, "一: 综合热点新闻(国内)", china_news)
     #添加分页符
@@ -119,6 +126,9 @@ def create_news_brief(news_data, json_date_str):
     
     # 添加第三部分：汽车类新闻
     add_news_section(doc, "三: 汽车类热点新闻", auto_news)
+    
+    # 添加第四部分：疑似重复信息新闻
+    add_news_section(doc, "四: 疑似重复信息新闻", duplicate_news)
     
     # 添加汽车相关企业股市情况
     # 获取当前日期，替换YYYY年MM月DD日
@@ -133,6 +143,8 @@ def create_news_brief(news_data, json_date_str):
     title_run.font.color.rgb = RGBColor(0, 0, 0)
     set_font(title_run)
     
+
+
     # 添加来源
     source_p = doc.add_paragraph()
     source_p.paragraph_format.space_after = Pt(0)
@@ -297,19 +309,31 @@ def main():
     # 获取当前日期
     json_date_str = datetime.now().strftime("%Y%m%d")
     output_date_str = datetime.now().strftime("%Y年%m月%d日")
+    date_hour = datetime.now().strftime("%H")
     
     # 设置文件路径
     json_file = f"D:/pythonProject/DailyKnows/materials/Local_news_{json_date_str}_with_summary.json"
-    output_file = f"D:/pythonProject/DailyKnows/DailyReport/{output_date_str} 新闻简报.docx"
+       
+    #如果是0-12点，则生成新闻早报，如果是12-24点，则生成新闻晚报
+    if date_hour >= "00" and date_hour <= "12":
+        output_file = f"D:/pythonProject/DailyKnows/DailyReport/{output_date_str} 新闻早报.docx"
+    elif date_hour >= "12" and date_hour <= "24":
+        output_file = f"D:/pythonProject/DailyKnows/DailyReport/{output_date_str} 新闻晚报.docx"
     
-    # 加载新闻数据
+    # 加载新闻数据，
     news_data = load_news_data(json_file)
     if not news_data:
         print("无法加载新闻数据，程序退出")
         return
+    # #如果date_hour是0-12点，则加载完整数据，如果是12-24点，则筛选newsdata中timeliness=1的数据
+    # if date_hour >= "00" and date_hour <= "12":
+    #     news_data = news_data
+    # elif date_hour >= "12" and date_hour <= "24":
+    #     news_data = [news for news in news_data if news['timeliness'] == "1"]
+
     
     # 创建新闻简报文档
-    doc = create_news_brief(news_data, output_date_str)
+    doc = create_news_brief(news_data, output_date_str,date_hour)
     
     # 保存文档
     doc.save(output_file)

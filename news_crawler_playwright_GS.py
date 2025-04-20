@@ -100,6 +100,8 @@ async def get_news_content(context, news_data):
         try:
             await news_page.goto(news['url'], timeout=50000)
             await news_page.wait_for_load_state('domcontentloaded')
+            #等待2s
+            await asyncio.sleep(2)
             
             # 截图保存整个页面
             content_screenshot_path = f"img/gasgoo_news_{i+1}_content.png"

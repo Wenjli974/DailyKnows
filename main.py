@@ -58,10 +58,18 @@ def main():
     
     #检查是否存在当天的新闻json文件
     news_json_file = f"D:/pythonProject/DailyKnows/materials/Local_news_{date_str}.json"
+    news_json_file_with_summary = f"D:/pythonProject/DailyKnows/materials/Local_news_{date_str}_with_summary.json"
     #如果存在，删除该文档运行之后的程序，如果不存在，则运行之后的程序
     if os.path.exists(news_json_file):
-        logger.info("存在当天的新闻json文件，删除该文档")
-        os.remove(news_json_file)
+        logger.info("存在当天的新闻json文件，对文档进行备份")
+        #os.remove(news_json_file)
+        #将news_json_file文件重命名
+        os.rename(news_json_file, f"D:/pythonProject/DailyKnows/materials/Local_news_{date_str}_1.json")
+    if os.path.exists(news_json_file_with_summary):
+        logger.info("存在当天的新闻json_with_summary文件，对文档进行备份")
+        #os.remove(news_json_file_with_summary)
+        #将news_json_file_with_summary文件重命名
+        os.rename(news_json_file_with_summary, f"D:/pythonProject/DailyKnows/materials/Local_news_{date_str}_1_with_summary.json")
     else:
         logger.info("不存在当天的新闻json文件，运行之后的程序")
     
@@ -90,12 +98,12 @@ def main():
     time.sleep(2)
     
     # 4. 执行新闻摘要生成
-    if not run_script("news_summary_llm.py", "新闻摘要生成"):
+    if not run_script("llm_memory.py", "新闻摘要生成"):
         logger.error("新闻摘要生成失败，流程无法继续")
         return
     
     # 暂停一下，确保文件已正确写入
-    time.sleep(2)
+    time.sleep(10)
     
     # 5. 执行新闻简报生成
     if not run_script("create_news_brief.py", "新闻简报文档生成"):
@@ -106,7 +114,13 @@ def main():
     
     # 获取当前日期的中文格式
     date_str_cn = datetime.now().strftime("%Y年%m月%d日")
-    output_file = f"D:/pythonProject/DailyKnows/DailyReport/{date_str_cn} 新闻简报.docx"
+    date_hour = datetime.now().strftime("%H")
+    #如果是0-12点，则生成新闻早报，如果是12-24点，则生成新闻晚报
+    if date_hour >= "00" and date_hour <= "12":
+        output_file = f"D:/pythonProject/DailyKnows/DailyReport/{date_str_cn} 新闻早报.docx"
+    elif date_hour >= "12" and date_hour <= "24":
+        output_file = f"D:/pythonProject/DailyKnows/DailyReport/{date_str_cn} 新闻晚报.docx"
+    
     
     if os.path.exists(output_file):
         logger.info(f"生成的新闻简报文件: {output_file}")
