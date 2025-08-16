@@ -21,6 +21,7 @@ from docx.enum.text import WD_ALIGN_PARAGRAPH, WD_LINE_SPACING
 from docx.oxml.ns import qn
 from docx.oxml import OxmlElement
 from dotenv import load_dotenv
+import pandas as pd
 
 def load_news_data(file_path):
     """加载JSON新闻数据文件"""
@@ -30,6 +31,105 @@ def load_news_data(file_path):
     except Exception as e:
         print(f"加载JSON文件时出错：{e}")
         return None
+
+def load_share_data(file_path):
+    """加载share_id Excel文件并转换为HTML表格"""
+    try:
+        if not os.path.exists(file_path):
+            print(f"share_id文件不存在：{file_path}")
+            return None, None, None
+            
+        # 读取Excel文件
+        df = pd.read_excel(file_path)
+        
+        # 提取日期信息（假设所有行的日期相同，取第一行的日期）
+        share_date = None
+        if '日期' in df.columns and len(df) > 0:
+            first_date = df['日期'].iloc[0]
+            if pd.notna(first_date):
+                # 将日期转换为 YYYY-MM-DD 格式
+                if isinstance(first_date, str):
+                    # 如果是字符串格式的日期（如 20250815）
+                    if len(first_date) == 8 and first_date.isdigit():
+                        share_date = f"{first_date[:4]}-{first_date[4:6]}-{first_date[6:8]}"
+                    else:
+                        share_date = first_date
+                else:
+                    # 如果是datetime对象
+                    share_date = first_date.strftime("%Y-%m-%d")
+        
+        # 只保留指定的字段
+        required_columns = ['公司名称', '收盘', '单位', '涨跌幅']
+        existing_columns = [col for col in required_columns if col in df.columns]
+        
+        if not existing_columns:
+            print(f"Excel文件中未找到必要的字段：{required_columns}")
+            return None, None, None
+            
+        # 只保留需要的列
+        df = df[existing_columns]
+        
+        # 确保涨跌幅字段为百分比格式
+        if '涨跌幅' in df.columns:
+            # 如果涨跌幅不是字符串且不包含%，则转换为百分比格式
+            def format_percentage(value):
+                if pd.isna(value):
+                    return value
+                # 如果已经是字符串且包含%，直接返回
+                if isinstance(value, str) and '%' in value:
+                    return value
+                # 如果是数值，转换为百分比
+                try:
+                    # 假设数值是小数形式（如0.05表示5%）
+                    if isinstance(value, (int, float)):
+                        return f"{value * 100:.2f}%"
+                    # 如果是字符串数值，先转换再格式化
+                    elif isinstance(value, str):
+                        num_value = float(value)
+                        return f"{num_value * 100:.2f}%"
+                    else:
+                        return value
+                except:
+                    return value
+            
+            df['涨跌幅'] = df['涨跌幅'].apply(format_percentage)
+        
+        # 转换为HTML表格
+        html_table = df.to_html(index=False, escape=False, table_id="share_table")
+        
+        # 添加CSS样式美化表格
+        styled_html = f"""
+        <style>
+        #share_table {{
+            border-collapse: collapse;
+            width: 100%;
+            margin: 20px 0;
+            font-family: '微软雅黑', Arial, sans-serif;
+        }}
+        #share_table th, #share_table td {{
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }}
+        #share_table th {{
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }}
+        #share_table tr:nth-child(even) {{
+            background-color: #f9f9f9;
+        }}
+        #share_table tr:hover {{
+            background-color: #f5f5f5;
+        }}
+        </style>
+        {html_table}
+        """
+        
+        return df, styled_html, share_date
+        
+    except Exception as e:
+        print(f"加载share_id文件时出错：{e}")
+        return None, None, None
     
 
 
@@ -87,7 +187,7 @@ def create_news_brief(news_data, json_date_str, date_hour):
     footer = sections[0].footer
     footer_para = footer.paragraphs[0]
     footer_para.alignment = WD_ALIGN_PARAGRAPH.CENTER
-    footer_run = footer_para.add_run(f'第')
+    footer_run = footer_para.add_run('第')
     footer_run.font.size = Pt(9)
     set_font(footer_run)
     add_page_number(footer_run)
@@ -113,7 +213,7 @@ def create_news_brief(news_data, json_date_str, date_hour):
     china_news = [news for news in news_data if news['category'] == "中国新闻" and news['is_duplicate'] == "否"]
     international_news = [news for news in news_data if news['category'] == "国际新闻" and news['is_duplicate'] == "否"]
     auto_news = [news for news in news_data if news['category'] == "汽车相关" and news['is_duplicate'] == "否"]
-    duplicate_news = [news for news in news_data if news['is_duplicate'] != "否"]
+    # duplicate_news = [news for news in news_data if news['is_duplicate'] != "否"]  # 暂时不使用
 
     # 添加第一部分：国内新闻
     add_news_section(doc, "一: 综合热点新闻(国内)", china_news)
@@ -128,7 +228,7 @@ def create_news_brief(news_data, json_date_str, date_hour):
     add_news_section(doc, "三: 汽车类热点新闻", auto_news)
     
     # 添加第四部分：疑似重复信息新闻
-    add_news_section(doc, "四: 疑似重复信息新闻", duplicate_news)
+    # add_news_section(doc, "四: 疑似重复信息新闻", duplicate_news)
     
     # 添加汽车相关企业股市情况
     # 获取当前日期，替换YYYY年MM月DD日
@@ -235,7 +335,7 @@ def add_news_section(doc, section_title, news_list):
             # 添加边框集合到段落属性
             pPr.append(pBdr)
 
-def send_news_brief_email(file_path, recipients, subject=None, body=None, sender=None, smtp_server=None, smtp_port=None, smtp_user=None, smtp_password=None):
+def send_news_brief_email(file_path, recipients, subject=None, body=None, share_html_table=None, share_file_path=None, share_date=None, sender=None, smtp_server=None, smtp_port=None, smtp_user=None, smtp_password=None):
     """发送新闻简报邮件
     
     参数:
@@ -243,6 +343,9 @@ def send_news_brief_email(file_path, recipients, subject=None, body=None, sender
         recipients (str或list): 收件人邮箱，可以是字符串或列表
         subject (str): 邮件主题，默认为文件名
         body (str): 邮件正文，默认为简单问候
+        share_html_table (str): 股票信息HTML表格
+        share_file_path (str): share_id Excel文件路径
+        share_date (str): 股票数据的日期，格式如 YYYY-MM-DD
         sender (str): 发件人邮箱
         smtp_server (str): SMTP服务器地址
         smtp_port (int): SMTP服务器端口
@@ -254,7 +357,32 @@ def send_news_brief_email(file_path, recipients, subject=None, body=None, sender
         subject = f"每日新闻简报 - {datetime.now().strftime('%Y年%m月%d日')}"
     
     if body is None:
-        body = f"Dear：\n\n请查收附件，谢谢！\n\nBest regards, \n\nWenjin"
+        body = "Dear：\n\n请查收附件，谢谢！\n\nBest regards, \n\nWenjin"
+    
+    # 如果有股票表格，创建HTML格式的邮件正文
+    if share_html_table:
+        # 构建股票情况标题，如果有日期则添加日期
+        stock_title = "汽车相关企业股市情况"
+        if share_date:
+            stock_title += f" {share_date}"
+            
+        html_body = f"""
+        <html>
+        <head>
+            <meta charset="utf-8">
+        </head>
+        <body>
+            <p>Dear：</p>
+            <p>请查收附件，谢谢！</p>
+            <h3>{stock_title}</h3>
+            {share_html_table}
+            <p>Best regards,</p>
+            <p>Wenjin</p>
+        </body>
+        </html>
+        """
+    else:
+        html_body = None
     
     # 确保recipients是列表
     if isinstance(recipients, str):
@@ -268,9 +396,14 @@ def send_news_brief_email(file_path, recipients, subject=None, body=None, sender
     msg['Subject'] = subject
     
     # 添加邮件正文
-    msg.attach(MIMEText(body, 'plain', 'utf-8'))
+    if html_body:
+        # 添加HTML格式正文
+        msg.attach(MIMEText(html_body, 'html', 'utf-8'))
+    else:
+        # 添加纯文本格式正文
+        msg.attach(MIMEText(body, 'plain', 'utf-8'))
     
-    # 添加附件
+    # 添加Word文档附件
     if os.path.exists(file_path):
         with open(file_path, 'rb') as f:
             # 使用正确的MIME类型处理Word文档
@@ -283,8 +416,24 @@ def send_news_brief_email(file_path, recipients, subject=None, body=None, sender
             attachment.add_header('Content-Type', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', name=filename)
             msg.attach(attachment)
     else:
-        print(f"附件文件不存在: {file_path}")
+        print(f"Word文档附件不存在: {file_path}")
         return False
+    
+    # 添加share_id Excel文件附件
+    if share_file_path and os.path.exists(share_file_path):
+        with open(share_file_path, 'rb') as f:
+            # 使用正确的MIME类型处理Excel文档
+            excel_attachment = MIMEBase('application', 'vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+            excel_attachment.set_payload(f.read())
+            encode_base64(excel_attachment)
+            excel_filename = os.path.basename(share_file_path)
+            excel_attachment.add_header('Content-Disposition', f'attachment; filename="{excel_filename}"')
+            # 添加正确的内容类型头信息
+            excel_attachment.add_header('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', name=excel_filename)
+            msg.attach(excel_attachment)
+    elif share_file_path:
+        print(f"share_id附件文件不存在: {share_file_path}")
+        # 不返回False，因为share_id文件可能是可选的
     
     # 发送邮件
     try:
@@ -313,6 +462,7 @@ def main():
     
     # 设置文件路径
     json_file = f"D:/pythonProject/DailyKnows/materials/Local_news_{json_date_str}_with_summary.json"
+    share_file = f"D:/pythonProject/DailyKnows/materials/share_id_{json_date_str}.xlsx"
        
     #如果是0-12点，则生成新闻早报，如果是12-24点，则生成新闻晚报
     if date_hour >= "00" and date_hour <= "12":
@@ -325,12 +475,15 @@ def main():
     if not news_data:
         print("无法加载新闻数据，程序退出")
         return
-    # #如果date_hour是0-12点，则加载完整数据，如果是12-24点，则筛选newsdata中timeliness=1的数据
-    # if date_hour >= "00" and date_hour <= "12":
-    #     news_data = news_data
-    # elif date_hour >= "12" and date_hour <= "24":
-    #     news_data = [news for news in news_data if news['timeliness'] == "1"]
 
+    # 加载股票数据
+    share_df, share_html_table, share_date = load_share_data(share_file)
+    if share_df is not None:
+        print(f"成功加载股票数据：{len(share_df)} 条记录")
+        if share_date:
+            print(f"股票数据日期：{share_date}")
+    else:
+        print("未找到股票数据文件，将发送不包含股票信息的邮件")
     
     # 创建新闻简报文档
     doc = create_news_brief(news_data, output_date_str,date_hour)
@@ -362,6 +515,9 @@ def main():
     send_news_brief_email(
         file_path=output_file,
         recipients=email_config['recipients'],
+        share_html_table=share_html_table,
+        share_file_path=share_file if os.path.exists(share_file) else None,
+        share_date=share_date,
         sender=email_config['sender'],
         smtp_server=email_config['smtp_server'],
         smtp_port=email_config['smtp_port'],

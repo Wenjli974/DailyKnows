@@ -6,12 +6,21 @@ from datetime import datetime
 from openai import OpenAI
 from dotenv import load_dotenv
 
-# 加载.env文件中的环境变量
+# # 加载.env文件中的环境变量
+# load_dotenv()
+
+# # 从环境变量中获取OpenAI API密钥
+# api_key = os.getenv("OPENAI_API_KEY")
+# client = OpenAI(api_key=api_key,http_client=None)
+
+# 加载环境变量
 load_dotenv()
 
-# 从环境变量中获取OpenAI API密钥
-api_key = os.getenv("OPENAI_API_KEY")
-client = OpenAI(api_key=api_key,http_client=None)
+# 获取OpenAI API密钥
+api_key = os.getenv("DEEPSEEK_API_KEY")
+
+# 初始化OpenAI客户端
+client = OpenAI(api_key=api_key,base_url="https://api.deepseek.com")
 
 async def extract_news_content(page, url):
     """提取新闻页面的正文内容"""
@@ -143,7 +152,7 @@ async def main():
         try:
             print("正在使用大模型分析新闻重要性...")
             response = client.chat.completions.create(
-                model="gpt-4o", # 或其他可用的模型
+                model="deepseek-chat", # 或其他可用的模型
                 messages=[
                     {"role": "system", "content": "你是一个新闻分析助手，擅长判断新闻重要性。"},
                     {"role": "user", "content": selection_criteria}

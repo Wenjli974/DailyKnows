@@ -97,6 +97,11 @@ def main():
     # 暂停一下，确保文件已正确写入
     time.sleep(2)
     
+
+    # 6. 执行share_info
+    if not run_script("share_info.py", "share_info"):
+        logger.warning("share_info执行失败，但流程将继续")
+
     # 4. 执行新闻摘要生成
     if not run_script("llm_memory.py", "新闻摘要生成"):
         logger.error("新闻摘要生成失败，流程无法继续")

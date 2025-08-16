@@ -109,21 +109,32 @@ def check_duplicate_news():
 
     date_str = datetime.now().strftime("%Y%m%d")
     yesterday_date_str = (datetime.now() - timedelta(days=1)).strftime("%Y%m%d")
+    yestbefore_date_str = (datetime.now() - timedelta(days=2)).strftime("%Y%m%d")
     # 构建文件路径
     today_file = f'D:/pythonProject/DailyKnows/materials/Local_news_{date_str}.json'
-    #昨日最新文件
+    #昨日历史文件
     yesterday_file = f'D:/pythonProject/DailyKnows/materials/Local_news_{yesterday_date_str}.json'
+    #前日历史文件
+    yestbefore_file = f'D:/pythonProject/DailyKnows/materials/Local_news_{yestbefore_date_str}.json'
     #今日历史文件
     today_history_file = f'D:/pythonProject/DailyKnows/materials/Local_news_{date_str}_1.json'
     try:
+        #初始化变量，避免文件不存在时的错误
+        yesterday_news = []
+        yestbefore_news = []
+        today_history_news = []
+        
         #读取yesterday_file和today_history_file 所有标题 拼接在一起，与今日文件内容进行查重
         if os.path.exists(yesterday_file):
             with open(yesterday_file, 'r', encoding='utf-8') as f:
                 yesterday_news = json.load(f)
+        if os.path.exists(yestbefore_file):
+            with open(yestbefore_file, 'r', encoding='utf-8') as f:
+                yestbefore_news = json.load(f)
         if os.path.exists(today_history_file):
             with open(today_history_file, 'r', encoding='utf-8') as f:
                 today_history_news = json.load(f)
-        history_titles = {news['title'] for news in yesterday_news} | {news['title'] for news in today_history_news}
+        history_titles = {news['title'] for news in yestbefore_news} | {news['title'] for news in yesterday_news} | {news['title'] for news in today_history_news} 
     
         with open(today_file, 'r', encoding='utf-8') as f:
             today_news = json.load(f)
